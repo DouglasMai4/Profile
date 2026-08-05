@@ -1,0 +1,94 @@
+---
+import { ArrowRight, CalendarDays, Clock, Newspaper } from '@lucide/astro';
+
+import Footer from '@/components/Footer.astro';
+import Navbar from '@/components/Navbar.astro';
+import Badge from '@/components/ui/Badge.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getDict, localePath, type Locale } from '@/i18n';
+import { formatDate, getPosts, postSlug, readingTimeMinutes } from '@/lib/blog';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDict(locale);
+const posts = await getPosts(locale);
+---
+
+<BaseLayout locale={locale} title={t.meta.blogTitle} description={t.meta.blogDescription} path="/blog/">
+	<main class="min-h-dvh py-24 md:pt-32 px-4 relative overflow-hidden bg-background">
+		<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+		<div class="container mx-auto max-w-4xl relative z-10">
+			<header class="flex flex-col items-center mb-16 space-y-4 text-center">
+				<Badge>
+					<Newspaper class="w-4 h-4 mr-2" />
+					{t.blog.badge}
+				</Badge>
+				<h1 class="text-3xl md:text-5xl font-bold font-mono tracking-tight text-foreground">
+					{t.blog.titleStart}
+					<span class="text-primary">{t.blog.titleHighlight}</span>
+				</h1>
+				<p class="text-muted-foreground max-w-2xl text-lg">{t.blog.description}</p>
+			</header>
+
+			{
+				posts.length === 0 ? (
+					<p class="text-center text-muted-foreground font-mono">{t.blog.empty}</p>
+				) : (
+					<div class="grid gap-6">
+						{posts.map((post, index) => (
+							<article
+								class="group relative p-6 md:p-8 rounded-2xl bg-zinc-900/40 border border-white/5 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 animate-in-view"
+								style={`--stagger: ${index * 0.1}s`}
+							>
+								<div class="flex flex-wrap items-center gap-4 text-xs text-muted-foreground font-mono mb-3">
+									<span class="flex items-center gap-1.5">
+										<CalendarDays class="w-3.5 h-3.5" />
+										<time datetime={post.data.pubDate.toISOString()}>
+											{formatDate(post.data.pubDate, locale)}
+										</time>
+									</span>
+									<span class="flex items-center gap-1.5">
+										<Clock class="w-3.5 h-3.5" />
+										{readingTimeMinutes(post.body)} {t.blog.minRead}
+									</span>
+								</div>
+
+								<h2 class="text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors mb-2">
+									<a href={localePath(locale, `/blog/${postSlug(post)}/`)} class="after:absolute after:inset-0">
+										{post.data.title}
+									</a>
+								</h2>
+
+								<p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-4">
+									{post.data.description}
+								</p>
+
+								<div class="flex items-center justify-between">
+									<div class="flex flex-wrap gap-2">
+										{post.data.tags.map((tag) => (
+											<span class="text-xs px-2 py-1 rounded bg-white/5 text-zinc-400 border border-white/5 group-hover:border-primary/20 group-hover:text-zinc-300 transition-colors">
+												{tag}
+											</span>
+										))}
+									</div>
+
+									<span class="inline-flex items-center text-sm font-medium text-primary">
+										{t.blog.readMore}
+										<ArrowRight class="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+									</span>
+								</div>
+							</article>
+						))}
+					</div>
+				)
+			}
+		</div>
+	</main>
+
+	<Footer locale={locale} />
+	<Navbar locale={locale} path="/blog/" />
+</BaseLayout>
