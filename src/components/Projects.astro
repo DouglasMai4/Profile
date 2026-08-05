@@ -1,0 +1,202 @@
+---
+import { ExternalLink, FolderGit, LoaderCircle, Lock, Play } from '@lucide/astro';
+
+import Badge from '@/components/ui/Badge.astro';
+import { getDict, type Locale } from '@/i18n';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDict(locale);
+
+interface Project {
+	title: string;
+	description: string;
+	image: string;
+	tags: string[];
+	links: {
+		demo?: string;
+		repo?: string;
+	};
+	isPrivate: boolean;
+	status: 'completed' | 'in-progress';
+}
+
+const projects: Project[] = [
+	{
+		title: 'Pulse Guard',
+		description: t.projects.items.pulseGuard,
+		image: '/pulse-guard.png',
+		tags: ['React', 'TypeScript', 'Hono', 'Bun'],
+		links: {
+			repo: 'https://github.com/douglasmai4/pulse-guard',
+		},
+		isPrivate: false,
+		status: 'in-progress',
+	},
+	{
+		title: 'Wilo AI',
+		description: t.projects.items.wilo,
+		image: '/wilo-ai.png',
+		tags: ['React', 'Node.js', 'Express', 'Python', 'Docker'],
+		links: {
+			demo: 'https://lp.appwilo.com',
+		},
+		isPrivate: true,
+		status: 'completed',
+	},
+	{
+		title: 'Kingdom Forge',
+		description: t.projects.items.forge,
+		image: '/kingdom-softwares.png',
+		tags: ['React', 'Bun', 'Hono', 'Redis'],
+		links: {
+			demo: 'https://kingdomsoftwares.com.br',
+		},
+		isPrivate: true,
+		status: 'in-progress',
+	},
+];
+---
+
+<section id="projects" class="py-24 px-4 bg-background relative overflow-hidden min-h-dvh">
+	<div
+		class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none"
+	>
+	</div>
+
+	<div class="container mx-auto max-w-6xl relative z-10">
+		<div class="flex flex-col items-center mb-16 space-y-4 text-center">
+			<Badge>
+				<FolderGit class="w-4 h-4 mr-2" />
+				{t.projects.badge}
+			</Badge>
+			<h2 class="text-3xl md:text-5xl font-bold font-mono tracking-tight text-foreground">
+				{t.projects.titleStart}
+				<span class="text-primary">{t.projects.titleHighlight}</span>
+			</h2>
+			<p class="text-muted-foreground max-w-2xl text-lg">{t.projects.description}</p>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+			{
+				projects.map((project, index) => (
+					<article
+						class="group h-full bg-zinc-900/40 border border-white/5 rounded-xl backdrop-blur-sm overflow-hidden hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 flex flex-col py-4 animate-in-view"
+						style={`--stagger: ${index * 0.2}s`}
+					>
+						<div class="relative h-48 overflow-hidden mx-4 rounded-md border shadow">
+							<div class="absolute inset-0 bg-linear-to-t from-zinc-900 via-transparent to-transparent z-10 opacity-60" />
+
+							<img
+								src={project.image}
+								alt={project.title}
+								width="400"
+								height="192"
+								loading="lazy"
+								decoding="async"
+								class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
+							/>
+
+							<div class="absolute top-3 right-3 z-20">
+								{project.status === 'in-progress' ? (
+									<span class="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full border bg-amber-500/20 text-amber-400 border-amber-500/30 backdrop-blur-md">
+										<LoaderCircle class="w-3 h-3 mr-1 animate-spin" />
+										{t.projects.inDevelopment}
+									</span>
+								) : (
+									<span class="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-full border bg-emerald-500/20 text-emerald-400 border-emerald-500/30 backdrop-blur-md">
+										{t.projects.completed}
+									</span>
+								)}
+							</div>
+						</div>
+
+						<div class="p-6 flex-1 flex flex-col">
+							<div class="flex-1 space-y-3">
+								<div class="flex justify-between items-start">
+									<h3 class="text-xl font-bold text-foreground group-hover:text-primary transition-colors line-clamp-1">
+										{project.title}
+									</h3>
+									{project.isPrivate && (
+										<div title={t.projects.privateCode}>
+											<Lock class="w-4 h-4 text-muted-foreground/50" />
+										</div>
+									)}
+								</div>
+
+								<p class="text-muted-foreground text-sm leading-relaxed line-clamp-3">
+									{project.description}
+								</p>
+							</div>
+
+							<div class="mt-6 space-y-4">
+								<div class="flex flex-wrap gap-2">
+									{project.tags.map((tag) => (
+										<span class="text-xs px-2 py-1 rounded bg-white/5 text-zinc-400 border border-white/5 group-hover:border-primary/20 group-hover:text-zinc-300 transition-colors">
+											{tag}
+										</span>
+									))}
+								</div>
+
+								<div class="pt-4 border-t border-white/5 flex items-center gap-3">
+									{project.links.demo && (
+										<a
+											href={project.links.demo}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="flex-1 inline-flex items-center justify-center h-8 px-3 text-sm font-medium rounded-md bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground border border-primary/20 transition-all"
+										>
+											<Play class="w-4 h-4 mr-2" />
+											{t.projects.test}
+										</a>
+									)}
+
+									{project.isPrivate ? (
+										<div class="flex-1 flex items-center justify-center gap-2 px-3 py-1.5 text-sm font-medium text-muted-foreground bg-zinc-800/50 rounded-md border border-white/5 cursor-not-allowed opacity-70">
+											<Lock class="w-4 h-4" />
+											<span>{t.projects.private}</span>
+										</div>
+									) : (
+										<a
+											href={project.links.repo}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="flex-1 inline-flex items-center justify-center h-8 px-3 text-sm font-medium rounded-md border border-white/10 hover:bg-white/5 hover:text-white transition-colors"
+										>
+											<svg
+												role="img"
+												viewBox="0 0 24 24"
+												xmlns="http://www.w3.org/2000/svg"
+												class="w-4 h-4 mr-2"
+												fill="currentColor"
+											>
+												<title>GitHub</title>
+												<path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+											</svg>
+											{t.projects.code}
+										</a>
+									)}
+								</div>
+							</div>
+						</div>
+					</article>
+				))
+			}
+		</div>
+
+		<div class="mt-16 text-center animate-in-view">
+			<a
+				href="https://github.com/douglasmai4"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="inline-flex items-center text-sm font-medium underline-offset-4 hover:underline text-muted-foreground hover:text-primary transition-colors"
+			>
+				{t.projects.seeGithub}
+				<ExternalLink class="w-4 h-4 ml-2" />
+			</a>
+		</div>
+	</div>
+</section>
