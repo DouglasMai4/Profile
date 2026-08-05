@@ -1,0 +1,28 @@
+---
+import { Heart } from '@lucide/astro';
+
+import { getDict, type Locale } from '@/i18n';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDict(locale);
+---
+
+<footer class="container mx-auto max-w-5xl relative z-10 mt-24 p-8 border-t border-white/5">
+	<div
+		class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground"
+	>
+		<p class="font-mono">
+			© {new Date().getFullYear()} Douglas Maia. {t.footer.allRights}
+		</p>
+
+		<div class="flex items-center gap-2">
+			<span>{t.footer.developedWith}</span>
+			<Heart class="w-4 h-4 text-primary animate-pulse" />
+			<span>{t.footer.andCoffee}</span>
+		</div>
+	</div>
+</footer>

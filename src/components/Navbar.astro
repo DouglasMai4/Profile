@@ -1,0 +1,159 @@
+---
+import {
+	CodeXml,
+	FolderGit,
+	House,
+	Languages,
+	MessageCircle,
+	Newspaper,
+	UserRound,
+} from '@lucide/astro';
+
+import { alternatePaths, getDict, localePath, locales, type Locale } from '@/i18n';
+
+interface Props {
+	locale: Locale;
+	path?: string;
+}
+
+const { locale, path = '/' } = Astro.props;
+
+const t = getDict(locale);
+const home = localePath(locale, '/');
+
+const navItems = [
+	{ name: t.navbar.home, href: `${home}#hero`, id: 'hero', Icon: House },
+	{ name: t.navbar.about, href: `${home}#about`, id: 'about', Icon: UserRound },
+	{ name: t.navbar.projects, href: `${home}#projects`, id: 'projects', Icon: FolderGit },
+	{ name: t.navbar.contact, href: `${home}#contact`, id: 'contact', Icon: MessageCircle },
+	{ name: t.navbar.blog, href: localePath(locale, '/blog/'), id: 'blog', Icon: Newspaper },
+];
+
+const isBlog = path.startsWith('/blog');
+const alternates = alternatePaths(path);
+---
+
+<header class="sticky md:fixed bottom-4 md:top-4 md:bottom-auto inset-x-0 z-50 flex justify-center pointer-events-none px-4">
+	<div
+		data-navbar
+		class="pointer-events-auto flex items-center gap-1 p-1.5 rounded-full border transition-all duration-300 shadow-lg shadow-primary/5 bg-zinc-900/50 border-white/5 backdrop-blur-md data-scrolled:bg-zinc-900/80 data-scrolled:border-white/10 data-scrolled:backdrop-blur-xl"
+	>
+		<div class="hidden md:flex items-center px-3 py-2 text-primary font-mono font-bold mr-2 border-r border-white/10">
+			<CodeXml class="w-5 h-5" />
+		</div>
+
+		<nav class="flex items-center gap-1">
+			{
+				navItems.map(({ name, href, id, Icon }) => (
+					<a
+						href={href}
+						data-nav-link={id}
+						aria-current={isBlog && id === 'blog' ? 'page' : undefined}
+						class:list={[
+							'relative px-4 py-2 rounded-full text-sm font-medium transition-colors duration-300 flex items-center gap-2',
+							(isBlog ? id === 'blog' : id === 'hero')
+								? 'bg-primary text-primary-foreground'
+								: 'text-muted-foreground hover:text-foreground',
+						]}
+					>
+						<Icon class="w-4 h-4 relative z-10" />
+						<span class="hidden md:block relative z-10">{name}</span>
+					</a>
+				))
+			}
+		</nav>
+
+		<div class="w-px h-6 bg-white/10 mx-1"></div>
+
+		<div class="relative" data-language-selector>
+			<button
+				type="button"
+				aria-label={t.navbar.language}
+				aria-haspopup="menu"
+				aria-expanded="false"
+				class="relative p-2.5 rounded-full hover:bg-white/5 transition-colors group cursor-pointer"
+			>
+				<Languages class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+				<span class="absolute top-0.5 right-0.5 flex h-2 w-2">
+					<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+					<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+				</span>
+			</button>
+
+			<div
+				role="menu"
+				hidden
+				class="absolute right-0 bottom-full mb-3 md:bottom-auto md:top-full md:mt-3 min-w-48 p-1.5 rounded-xl bg-zinc-900/80 border border-white/10 backdrop-blur-xl shadow-xl flex flex-col gap-1"
+			>
+				{
+					locales.map((lang) => (
+						<a
+							role="menuitem"
+							href={alternates.find((alt) => alt.locale === lang.locale)?.path}
+							class:list={[
+								'flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors hover:bg-white/5',
+								lang.locale === locale ? 'text-primary' : 'text-foreground',
+							]}
+						>
+							<img src={lang.flag} alt="" width="24" height="16" loading="lazy" class="rounded-sm" />
+							{lang.title}
+						</a>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</header>
+
+<script>
+	const navbar = document.querySelector<HTMLElement>('[data-navbar]');
+
+	const links = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
+	const sections = ['hero', 'about', 'projects', 'contact']
+		.map((id) => document.getElementById(id))
+		.filter((section) => section !== null);
+
+	const INACTIVE = ['text-muted-foreground', 'hover:text-foreground'];
+
+	function setActive(id: string) {
+		for (const link of links) {
+			const isActive = link.dataset.navLink === id;
+			link.classList.toggle('bg-primary', isActive);
+			link.classList.toggle('text-primary-foreground', isActive);
+			for (const cls of INACTIVE) link.classList.toggle(cls, !isActive);
+		}
+	}
+
+	function onScroll() {
+		if (navbar) navbar.toggleAttribute('data-scrolled', window.scrollY > 0);
+
+		if (sections.length === 0) return;
+		const current = sections.find((section) => {
+			const rect = section.getBoundingClientRect();
+			return rect.top >= 0 && rect.top <= 300;
+		});
+		if (current) setActive(current.id);
+	}
+
+	window.addEventListener('scroll', onScroll, { passive: true });
+	onScroll();
+
+	const selector = document.querySelector<HTMLElement>('[data-language-selector]');
+	const trigger = selector?.querySelector('button');
+	const menu = selector?.querySelector<HTMLElement>('[role="menu"]');
+
+	if (selector && trigger && menu) {
+		const toggle = (open: boolean) => {
+			menu.hidden = !open;
+			trigger.setAttribute('aria-expanded', String(open));
+		};
+
+		trigger.addEventListener('click', () => toggle(Boolean(menu.hidden)));
+		document.addEventListener('click', (event) => {
+			if (!selector.contains(event.target as Node)) toggle(false);
+		});
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape') toggle(false);
+		});
+	}
+</script>
