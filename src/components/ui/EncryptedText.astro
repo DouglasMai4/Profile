@@ -1,0 +1,63 @@
+---
+interface Props {
+	text: string;
+	revealDelayMs?: number;
+	class?: string;
+}
+
+const { text, revealDelayMs = 50, class: className } = Astro.props;
+---
+
+<span data-encrypted-text data-reveal-delay={revealDelayMs} aria-label={text} class={className}
+	>{text}</span
+>
+
+<script>
+	const CHARSET =
+		'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-={}[];:,.<>/?';
+	const FLIP_DELAY_MS = 50;
+
+	const randomChar = () => CHARSET.charAt(Math.floor(Math.random() * CHARSET.length));
+
+	const scramble = (original: string) =>
+		[...original].map((ch) => (ch === ' ' ? ' ' : randomChar())).join('');
+
+	function animate(el: HTMLElement) {
+		const text = el.getAttribute('aria-label') ?? '';
+		const revealDelayMs = Math.max(1, Number(el.dataset.revealDelay) || 50);
+
+		if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+		let scrambled = scramble(text);
+		const startTime = performance.now();
+		let lastFlipTime = startTime;
+
+		const update = (now: number) => {
+			const revealCount = Math.min(text.length, Math.floor((now - startTime) / revealDelayMs));
+
+			if (now - lastFlipTime >= FLIP_DELAY_MS) {
+				scrambled = scramble(text);
+				lastFlipTime = now;
+			}
+
+			el.textContent = text.slice(0, revealCount) + scrambled.slice(revealCount);
+
+			if (revealCount < text.length) requestAnimationFrame(update);
+		};
+
+		requestAnimationFrame(update);
+	}
+
+	const observer = new IntersectionObserver((entries) => {
+		for (const entry of entries) {
+			if (entry.isIntersecting) {
+				animate(entry.target as HTMLElement);
+				observer.unobserve(entry.target);
+			}
+		}
+	});
+
+	for (const el of document.querySelectorAll<HTMLElement>('[data-encrypted-text]')) {
+		observer.observe(el);
+	}
+</script>

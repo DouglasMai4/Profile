@@ -1,0 +1,91 @@
+<canvas data-particles class="absolute inset-0 z-0 opacity-70" aria-hidden="true"></canvas>
+
+<script>
+	const SPEED = 0.5;
+	const MAX_DISTANCE = 150;
+	const OPACITY = 0.7;
+
+	interface Particle {
+		x: number;
+		y: number;
+		size: number;
+		speedX: number;
+		speedY: number;
+		color: string;
+	}
+
+	function setupCanvas(canvas: HTMLCanvasElement) {
+		const ctx = canvas.getContext('2d');
+		if (!ctx) return;
+
+		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		let particles: Particle[] = [];
+
+		const createParticle = (): Particle => ({
+			x: Math.random() * canvas.width,
+			y: Math.random() * canvas.height,
+			size: Math.random() * 3 + 1,
+			speedX: (Math.random() - 0.5) * SPEED,
+			speedY: (Math.random() - 0.5) * SPEED,
+			color: `hsla(210, 100%, ${50 + Math.random() * 20}%, ${0.1 + Math.random() * 0.3})`,
+		});
+
+		const init = () => {
+			const count = Math.floor((canvas.width * canvas.height) / 10000);
+			particles = Array.from({ length: count }, createParticle);
+		};
+
+		const resize = () => {
+			const container = canvas.parentElement;
+			if (!container) return;
+			const { width, height } = container.getBoundingClientRect();
+			canvas.width = width;
+			canvas.height = height;
+			init();
+		};
+
+		const draw = () => {
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+			for (const p of particles) {
+				p.x += p.speedX;
+				p.y += p.speedY;
+				if (p.x > canvas.width || p.x < 0) p.speedX = -p.speedX;
+				if (p.y > canvas.height || p.y < 0) p.speedY = -p.speedY;
+
+				ctx.fillStyle = p.color;
+				ctx.beginPath();
+				ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+				ctx.fill();
+			}
+
+			for (let a = 0; a < particles.length; a++) {
+				for (let b = a; b < particles.length; b++) {
+					const dx = particles[a]!.x - particles[b]!.x;
+					const dy = particles[a]!.y - particles[b]!.y;
+					const distance = Math.hypot(dx, dy);
+
+					if (distance < MAX_DISTANCE) {
+						const lineOpacity = 1 - distance / MAX_DISTANCE;
+						ctx.strokeStyle = `hsla(210, 100%, 70%, ${lineOpacity * 0.2 * OPACITY})`;
+						ctx.lineWidth = 1;
+						ctx.beginPath();
+						ctx.moveTo(particles[a]!.x, particles[a]!.y);
+						ctx.lineTo(particles[b]!.x, particles[b]!.y);
+						ctx.stroke();
+					}
+				}
+			}
+
+			if (!reducedMotion) requestAnimationFrame(draw);
+		};
+
+		resize();
+		window.addEventListener('resize', resize);
+		draw();
+	}
+
+	for (const canvas of document.querySelectorAll<HTMLCanvasElement>('canvas[data-particles]')) {
+		setupCanvas(canvas);
+	}
+</script>
