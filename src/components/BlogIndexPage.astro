@@ -67,7 +67,7 @@ const posts = await getPosts(locale);
 									{post.data.description}
 								</p>
 
-								<div class="flex items-center justify-between">
+								<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 									<div class="flex flex-wrap gap-2">
 										{post.data.tags.map((tag) => (
 											<span class="text-xs px-2 py-1 rounded bg-white/5 text-zinc-400 border border-white/5 group-hover:border-primary/20 group-hover:text-zinc-300 transition-colors">
@@ -76,7 +76,7 @@ const posts = await getPosts(locale);
 										))}
 									</div>
 
-									<span class="inline-flex items-center text-sm font-medium text-primary">
+									<span class="w-full sm:w-auto inline-flex items-center justify-center h-8 px-3 text-sm font-medium rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground border border-primary/20 transition-all">
 										{t.blog.readMore}
 										<ArrowRight class="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
 									</span>
