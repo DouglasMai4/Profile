@@ -48,14 +48,17 @@ export const ptBR = {
     seeGithub: "Ver todos os repositórios no GitHub",
     test: "Testar",
     code: "Código",
+    docs: "Docs",
     private: "Privado",
     privateCode: "Código Privado",
     completed: "Concluído",
     inDevelopment: "Em Desenvolvimento",
     items: {
-      pulseGuard:
-        "Status Page para monitoramento de serviços em tempo real, com histórico de incidentes e métricas de disponibilidade. Focado em performance, transparência e detecção rápida de falhas.",
-      wilo: "Plataforma de automação e gestão de campanhas com inteligência artificial, oferecendo organização, produtividade e insights em tempo real.",
+      kori: "Toolkit HTTP para Go construído sobre o Chi — inspirado no Hono e feito para ser idiomático em Go. Simplifica a criação de APIs rápidas, organizadas e tipadas.",
+      goalfy:
+        "CRM 360 com IA, WhatsApp e automações para operações de vendas, feito para o vendedor brasileiro. Onde atuo atualmente como desenvolvedor.",
+      kingdom:
+        "Software house focada em excelência técnica e inovação, onde atuo como fundador construindo soluções sob medida.",
       forge:
         "CRM com integração nativa ao WhatsApp, centralizando leads, conversas e rotinas comerciais em um único sistema rápido e escalável.",
     },

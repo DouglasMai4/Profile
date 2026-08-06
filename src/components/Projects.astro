@@ -1,5 +1,5 @@
 ---
-import { ExternalLink, FolderGit, LoaderCircle, Lock, Play } from '@lucide/astro';
+import { BookOpen, ExternalLink, FolderGit, LoaderCircle, Lock, Play } from '@lucide/astro';
 
 import Badge from '@/components/ui/Badge.astro';
 import { getDict, type Locale } from '@/i18n';
@@ -15,9 +15,11 @@ interface Project {
 	title: string;
 	description: string;
 	image: string;
+	imageFit?: 'cover' | 'contain';
 	tags: string[];
 	links: {
 		demo?: string;
+		docs?: string;
 		repo?: string;
 	};
 	isPrivate: boolean;
@@ -26,37 +28,39 @@ interface Project {
 
 const projects: Project[] = [
 	{
-		title: 'Pulse Guard',
-		description: t.projects.items.pulseGuard,
-		image: '/pulse-guard.png',
-		tags: ['React', 'TypeScript', 'Hono', 'Bun'],
+		title: 'Kori',
+		description: t.projects.items.kori,
+		image: '/kori.png',
+		imageFit: 'cover',
+		tags: ['Go', 'Chi', 'Open Source'],
 		links: {
-			repo: 'https://github.com/douglasmai4/pulse-guard',
+			docs: 'https://douglasmai4.github.io/kori-docs',
+			repo: 'https://github.com/douglasmai4/kori',
 		},
 		isPrivate: false,
 		status: 'in-progress',
 	},
 	{
-		title: 'Wilo AI',
-		description: t.projects.items.wilo,
-		image: '/wilo-ai.png',
-		tags: ['React', 'Node.js', 'Express', 'Python', 'Docker'],
+		title: 'Goalfy',
+		description: t.projects.items.goalfy,
+		image: '/goalfy.png',
+		tags: ['CRM', 'AI', 'WhatsApp', 'SaaS'],
 		links: {
-			demo: 'https://lp.appwilo.com',
+			demo: 'https://goalfy.com.br',
 		},
 		isPrivate: true,
 		status: 'completed',
 	},
 	{
-		title: 'Kingdom Forge',
-		description: t.projects.items.forge,
+		title: 'Kingdom Softwares',
+		description: t.projects.items.kingdom,
 		image: '/kingdom-softwares.png',
-		tags: ['React', 'Bun', 'Hono', 'Redis'],
+		tags: ['Software House', 'Web', 'SaaS'],
 		links: {
 			demo: 'https://kingdomsoftwares.com.br',
 		},
 		isPrivate: true,
-		status: 'in-progress',
+		status: 'completed',
 	},
 ];
 ---
@@ -97,7 +101,10 @@ const projects: Project[] = [
 								height="192"
 								loading="lazy"
 								decoding="async"
-								class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 ease-out"
+								class:list={[
+									'w-full h-full transform group-hover:scale-110 transition-transform duration-700 ease-out',
+									project.imageFit === 'contain' ? 'object-contain p-8 bg-zinc-950/60' : 'object-cover',
+								]}
 							/>
 
 							<div class="absolute top-3 right-3 z-20">
@@ -127,7 +134,7 @@ const projects: Project[] = [
 									)}
 								</div>
 
-								<p class="text-muted-foreground text-sm leading-relaxed line-clamp-3">
+								<p class="text-muted-foreground text-sm leading-relaxed">
 									{project.description}
 								</p>
 							</div>
@@ -151,6 +158,18 @@ const projects: Project[] = [
 										>
 											<Play class="w-4 h-4 mr-2" />
 											{t.projects.test}
+										</a>
+									)}
+
+									{project.links.docs && (
+										<a
+											href={project.links.docs}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="flex-1 inline-flex items-center justify-center h-8 px-3 text-sm font-medium rounded-md bg-primary/10 text-primary hover:bg-primary hover:text-primary-foreground border border-primary/20 transition-all"
+										>
+											<BookOpen class="w-4 h-4 mr-2" />
+											{t.projects.docs}
 										</a>
 									)}
 

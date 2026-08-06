@@ -50,14 +50,17 @@ export const en: Dictionary = {
     seeGithub: "View all repositories on GitHub",
     test: "Test",
     code: "Code",
+    docs: "Docs",
     private: "Private",
     privateCode: "Private Code",
     completed: "Completed",
     inDevelopment: "In Development",
     items: {
-      pulseGuard:
-        "Status page for real-time service monitoring, with incident history and availability metrics. Focused on performance, transparency, and rapid fault detection.",
-      wilo: "A platform for campaign automation and management powered by artificial intelligence, offering organization, productivity, and real-time insights.",
+      kori: "HTTP toolkit for Go built on top of Chi — inspired by Hono and made idiomatic in Go. It makes building fast, organized and typed APIs simple.",
+      goalfy:
+        "CRM 360 with AI, WhatsApp and automations for sales operations, built for Brazilian sales teams. Where I currently work as a developer.",
+      kingdom:
+        "Software house focused on technical excellence and innovation, where I work as founder building tailor-made solutions.",
       forge:
         "CRM with native WhatsApp integration, centralizing leads, conversations, and sales routines in a single, fast, and scalable system.",
     },
