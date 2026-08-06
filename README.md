@@ -1,46 +1,43 @@
-# Astro Starter Kit: Basics
+# douglasmaia.dev.br
+
+Personal portfolio and blog, built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com).
+
+Fully static, zero client-side framework — the few interactive touches (particle background, navbar scroll spy, language switcher) are small vanilla scripts.
+
+## Features
+
+- 🌎 **i18n with static routes** — `/` (pt-BR) and `/en/`, with `hreflang` alternates and a localized sitemap
+- 📝 **Blog** — Markdown posts powered by Astro Content Collections, per language
+- 🔍 **SEO** — canonical URLs, Open Graph, Twitter cards and JSON-LD structured data
+- 📊 **Vercel Analytics & Speed Insights**
+
+## Getting started
 
 ```sh
-bun create astro@latest -- --template basics
+bun install
+bun dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The dev server runs at `localhost:4321`.
 
-## 🚀 Project Structure
+## Commands
 
-Inside of your Astro project, you'll see the following folders and files:
+| Command       | Action                                     |
+| :------------ | :----------------------------------------- |
+| `bun dev`     | Start the local dev server                 |
+| `bun build`   | Build the production site to `./dist/`     |
+| `bun preview` | Preview the production build locally       |
+| `bun astro`   | Run Astro CLI commands (`check`, `add`, …) |
+
+## Project structure
 
 ```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+src/
+├── components/      # Sections (Hero, About, Projects, …) and UI pieces
+├── content/blog/    # Blog posts in Markdown, per locale (pt-br/, en/)
+├── i18n/            # Locale dictionaries and URL helpers
+├── layouts/         # Base layout with SEO meta tags
+├── lib/             # Blog utilities (slugs, reading time)
+├── pages/           # Routes: /, /blog and their /en counterparts
+└── styles/          # Tailwind theme (global.css)
 ```
-
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
