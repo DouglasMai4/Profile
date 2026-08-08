@@ -94,5 +94,10 @@ export const en: Dictionary = {
     backToBlog: "Back to blog",
     minRead: "min read",
     empty: "No articles published yet. Come back soon!",
+    latestTitleStart: "Latest",
+    latestTitleHighlight: " Article",
+    latestDescription:
+      "The most recent piece from my blog about development and technology.",
+    seeAll: "See all articles",
   },
 };

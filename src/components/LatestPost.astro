@@ -1,0 +1,88 @@
+---
+import { ArrowRight, CalendarDays, Clock, Newspaper } from '@lucide/astro';
+
+import Badge from '@/components/ui/Badge.astro';
+import { getDict, localePath, type Locale } from '@/i18n';
+import { formatDate, getPosts, postSlug, readingTimeMinutes } from '@/lib/blog';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDict(locale);
+
+const [post] = await getPosts(locale);
+---
+
+{
+	post && (
+		<section id="blog" class="py-24 px-4 bg-background relative overflow-hidden">
+			<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
+
+			<div class="container mx-auto max-w-4xl relative z-10">
+				<div class="flex flex-col items-center mb-16 space-y-4 text-center">
+					<Badge>
+						<Newspaper class="w-4 h-4 mr-2" />
+						{t.blog.badge}
+					</Badge>
+					<h2 class="text-3xl md:text-5xl font-bold font-mono tracking-tight text-foreground">
+						{t.blog.latestTitleStart}
+						<span class="text-primary">{t.blog.latestTitleHighlight}</span>
+					</h2>
+					<p class="text-muted-foreground max-w-2xl text-lg">{t.blog.latestDescription}</p>
+				</div>
+
+				<article class="group relative p-6 md:p-8 rounded-2xl bg-zinc-900/40 border border-white/5 backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 animate-in-view">
+					<div class="flex flex-wrap items-center gap-4 text-xs text-muted-foreground font-mono mb-3">
+						<span class="flex items-center gap-1.5">
+							<CalendarDays class="w-3.5 h-3.5" />
+							<time datetime={post.data.pubDate.toISOString()}>
+								{formatDate(post.data.pubDate, locale)}
+							</time>
+						</span>
+						<span class="flex items-center gap-1.5">
+							<Clock class="w-3.5 h-3.5" />
+							{readingTimeMinutes(post.body)} {t.blog.minRead}
+						</span>
+					</div>
+
+					<h3 class="text-xl md:text-2xl font-bold text-foreground group-hover:text-primary transition-colors mb-2">
+						<a href={localePath(locale, `/blog/${postSlug(post)}/`)} class="after:absolute after:inset-0">
+							{post.data.title}
+						</a>
+					</h3>
+
+					<p class="text-muted-foreground text-sm md:text-base leading-relaxed mb-4">
+						{post.data.description}
+					</p>
+
+					<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+						<div class="flex flex-wrap gap-2">
+							{post.data.tags.map((tag) => (
+								<span class="text-xs px-2 py-1 rounded bg-white/5 text-zinc-400 border border-white/5 group-hover:border-primary/20 group-hover:text-zinc-300 transition-colors">
+									{tag}
+								</span>
+							))}
+						</div>
+
+						<span class="w-full sm:w-auto inline-flex items-center justify-center h-8 px-3 text-sm font-medium rounded-md bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground border border-primary/20 transition-all">
+							{t.blog.readMore}
+							<ArrowRight class="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+						</span>
+					</div>
+				</article>
+
+				<div class="mt-16 text-center animate-in-view">
+					<a
+						href={localePath(locale, '/blog/')}
+						class="inline-flex items-center text-sm font-medium underline-offset-4 hover:underline text-muted-foreground hover:text-primary transition-colors"
+					>
+						{t.blog.seeAll}
+						<ArrowRight class="w-4 h-4 ml-2" />
+					</a>
+				</div>
+			</div>
+		</section>
+	)
+}

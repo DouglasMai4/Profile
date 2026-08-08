@@ -92,5 +92,10 @@ export const ptBR = {
     backToBlog: "Voltar para o blog",
     minRead: "min de leitura",
     empty: "Nenhum artigo publicado ainda. Volte em breve!",
+    latestTitleStart: "Último",
+    latestTitleHighlight: " Artigo",
+    latestDescription:
+      "O que saiu mais recente do meu blog sobre desenvolvimento e tecnologia.",
+    seeAll: "Ver todos os artigos",
   },
 };
