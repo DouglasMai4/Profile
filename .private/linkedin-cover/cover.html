@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>LinkedIn cover</title>
+<style>
+@font-face{font-family:'Schibsted';src:url('../../node_modules/@fontsource-variable/schibsted-grotesk/files/schibsted-grotesk-latin-wght-normal.woff2') format('woff2');font-weight:400 900}
+@font-face{font-family:'JBM';src:url('../../node_modules/@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2') format('woff2');font-weight:100 800}
+:root{--cell:24px;--paper:#fbfcfe;--grid:#dde7f3;--ink:#1d3aa6;--text:#15213d;--muted:#4b5877;--rule:#dc4436}
+*{box-sizing:border-box;margin:0}
+body{width:1584px;height:396px;overflow:hidden;position:relative;font-family:'Schibsted',sans-serif;color:var(--text);
+ background:var(--paper);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px}
+.rule{position:absolute;top:0;bottom:0;left:166px;width:2px;background:var(--rule)}
+.date{position:absolute;left:0;width:144px;top:46px;text-align:right;font:500 12px/24px 'JBM';color:var(--rule)}
+.copy{position:absolute;left:480px;top:72px;width:440px}
+.copy h1{font-size:64px;line-height:60px;font-weight:800;letter-spacing:-.04em}
+.copy .role{margin-top:24px;font-size:22px;font-weight:600;color:var(--ink)}
+.copy .url{margin-top:24px;display:inline-block;font-size:20px;font-weight:700;color:var(--ink);border-bottom:2px solid color-mix(in oklab,var(--ink) 40%,transparent);padding-bottom:2px}
+.api{position:absolute;right:72px;top:48px;width:600px;height:300px;border:2px solid var(--ink);background:var(--paper)}
+.api .head{display:flex;justify-content:space-between;align-items:baseline;padding:16px 24px 0}
+.api .head b{font-size:20px;font-weight:800;letter-spacing:-.02em}
+.api .head span{font-size:12px;color:var(--muted)}
+.req{margin:12px 24px 0;border-bottom:2px solid var(--ink);font:500 15px/34px 'JBM'}
+.req em{font-style:normal;font-weight:700;color:var(--rule);margin-right:10px}
+.status{display:flex;justify-content:space-between;margin-top:14px;padding:4px 24px;border-top:2px solid var(--ink);font:12px/20px 'JBM';color:var(--muted)}
+pre{padding:2px 24px;font:500 13px/24px 'JBM';color:var(--text)}
+.k{color:var(--ink)}.p{color:var(--muted)}.n{color:var(--rule)}
+</style></head>
+<body>
+<div class="rule"></div>
+<p class="date">Joinville · SC</p>
+<div class="copy">
+  <h1>Me consulta.</h1>
+  <p class="role">dev full stack · Go &amp; TypeScript</p>
+  <p class="url">douglasmaia.dev.br</p>
+</div>
+<div class="api">
+  <div class="head"><b>API do Douglas</b><span>A API é de mentira. Os dados são de verdade.</span></div>
+  <p class="req"><em>GET</em>/douglas/stack</p>
+  <p class="status"><span>200 OK</span><span>0.42 ms</span></p>
+<pre><span class="p">{</span>
+  <span class="k">"backend"</span><span class="p">:</span>  <span class="p">[</span>"Go"<span class="p">,</span> "TypeScript"<span class="p">,</span> "Node.js"<span class="p">,</span> "Python"<span class="p">,</span> "Java"<span class="p">],</span>
+  <span class="k">"frontend"</span><span class="p">:</span> <span class="p">[</span>"React"<span class="p">,</span> "Astro"<span class="p">,</span> "Tailwind"<span class="p">],</span>
+  <span class="k">"data"</span><span class="p">:</span>     <span class="p">[</span>"PostgreSQL"<span class="p">,</span> "Redis"<span class="p">,</span> "Kafka"<span class="p">],</span>
+  <span class="k">"ai"</span><span class="p">:</span>       <span class="p">[</span>"LangChain"<span class="p">,</span> "LangGraph"<span class="p">,</span> "PGVector"<span class="p">]</span>
+<span class="p">}</span></pre>
+</div>
+</body></html>
