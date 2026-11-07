@@ -1,6 +1,4 @@
 ---
-import { Heart } from '@lucide/astro';
-
 import { getDict, type Locale } from '@/i18n';
 
 interface Props {
@@ -11,18 +9,10 @@ const { locale } = Astro.props;
 const t = getDict(locale);
 ---
 
-<footer class="container mx-auto max-w-5xl relative z-10 mt-24 p-8 border-t border-white/5">
-	<div
-		class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground"
-	>
-		<p class="font-mono">
-			© {new Date().getFullYear()} Douglas Maia. {t.footer.allRights}
-		</p>
-
-		<div class="flex items-center gap-2">
-			<span>{t.footer.developedWith}</span>
-			<Heart class="w-4 h-4 text-primary animate-pulse" />
-			<span>{t.footer.andCoffee}</span>
-		</div>
+<footer class="sheet mt-[calc(var(--cell)*6)] pb-[calc(var(--cell)*4)] sm:pb-cell">
+	<span class="in-margin margin-note pt-cell tabular">© {new Date().getFullYear()}</span>
+	<div class="flex flex-wrap justify-between gap-x-6 gap-y-1 border-t-2 border-line pt-cell pb-cell text-sm text-muted">
+		<p>Douglas Maia · {t.footer.made}</p>
+		<a href="#top" class="ink-link">{t.footer.top} ↑</a>
 	</div>
 </footer>

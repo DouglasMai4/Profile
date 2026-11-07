@@ -1,13 +1,5 @@
 ---
-import {
-	CodeXml,
-	FolderGit,
-	House,
-	Languages,
-	MessageCircle,
-	Newspaper,
-	UserRound,
-} from '@lucide/astro';
+import { Moon, Sun } from '@lucide/astro';
 
 import { alternatePaths, getDict, localePath, locales, type Locale } from '@/i18n';
 
@@ -20,140 +12,136 @@ const { locale, path = '/' } = Astro.props;
 
 const t = getDict(locale);
 const home = localePath(locale, '/');
+const isBlog = path.startsWith('/blog');
 
 const navItems = [
-	{ name: t.navbar.home, href: `${home}#hero`, id: 'hero', Icon: House },
-	{ name: t.navbar.about, href: `${home}#about`, id: 'about', Icon: UserRound },
-	{ name: t.navbar.projects, href: `${home}#projects`, id: 'projects', Icon: FolderGit },
-	{ name: t.navbar.contact, href: `${home}#contact`, id: 'contact', Icon: MessageCircle },
-	{ name: t.navbar.blog, href: localePath(locale, '/blog/'), id: 'blog', Icon: Newspaper },
+	{ name: t.navbar.blog, href: localePath(locale, '/blog/'), id: 'blog' },
+	{ name: t.navbar.work, href: `${home}#work`, id: 'work' },
+	{ name: t.navbar.stack, href: `${home}#stack`, id: 'stack' },
+	{ name: t.navbar.contact, href: `${home}#contact`, id: 'contact' },
 ];
 
-const isBlog = path.startsWith('/blog');
 const alternates = alternatePaths(path);
 ---
 
-<header class="sticky md:fixed bottom-4 md:top-4 md:bottom-auto inset-x-0 z-50 flex justify-center pointer-events-none px-4">
-	<div
-		data-navbar
-		class="pointer-events-auto flex items-center gap-1 p-1.5 rounded-full border transition-all duration-300 shadow-lg shadow-primary/5 bg-zinc-900/50 border-white/5 backdrop-blur-md data-scrolled:bg-zinc-900/80 data-scrolled:border-white/10 data-scrolled:backdrop-blur-xl"
-	>
-		<div class="hidden md:flex items-center px-3 py-2 text-primary font-mono font-bold mr-2 border-r border-white/10">
-			<CodeXml class="w-5 h-5" />
-		</div>
+<a
+	href="#main"
+	class="sr-only focus:not-sr-only focus:fixed focus:top-cell focus:left-cell focus:z-50 focus:bg-ink focus:text-paper focus:px-3 focus:py-1"
+>
+	{t.navbar.skip}
+</a>
 
-		<nav class="flex items-center gap-1">
+<header class="sheet sticky top-0 z-40 nav-paper border-b-2 border-transparent data-scrolled:border-line" data-navbar>
+	<div class="flex items-center gap-x-6 h-[calc(var(--cell)*3)]">
+		<a href={home} class="font-extrabold tracking-tight text-lg text-text mr-auto hover:text-ink transition-colors">
+			Douglas Maia
+		</a>
+
+		<nav aria-label="Principal" class="hidden sm:flex items-center gap-x-6 text-[0.9375rem]">
 			{
-				navItems.map(({ name, href, id, Icon }) => (
+				navItems.map(({ name, href, id }) => (
 					<a
 						href={href}
 						data-nav-link={id}
 						aria-current={isBlog && id === 'blog' ? 'page' : undefined}
-						class:list={[
-							'relative px-4 py-2 rounded-full text-sm font-medium transition-colors duration-300 flex items-center gap-2',
-							(isBlog ? id === 'blog' : id === 'hero')
-								? 'bg-primary text-primary-foreground'
-								: 'text-muted-foreground hover:text-foreground',
-						]}
+						class="relative py-1 text-muted hover:text-ink transition-colors aria-[current]:text-ink aria-[current]:font-semibold after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:bg-rule after:scale-x-0 after:origin-left after:transition-transform after:duration-300 aria-[current]:after:scale-x-100"
 					>
-						<Icon class="w-4 h-4 relative z-10" />
-						<span class="hidden md:block relative z-10">{name}</span>
+						{name}
 					</a>
 				))
 			}
 		</nav>
 
-		<div class="w-px h-6 bg-white/10 mx-1"></div>
-
-		<div class="relative" data-language-selector>
-			<button
-				type="button"
-				aria-label={t.navbar.language}
-				aria-haspopup="menu"
-				aria-expanded="false"
-				class="relative p-2.5 rounded-full hover:bg-white/5 transition-colors group cursor-pointer"
-			>
-				<Languages class="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
-				<span class="absolute top-0.5 right-0.5 flex h-2 w-2">
-					<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-					<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-				</span>
-			</button>
-
-			<div
-				role="menu"
-				hidden
-				class="absolute right-0 bottom-full mb-3 md:bottom-auto md:top-full md:mt-3 min-w-48 p-1.5 rounded-xl bg-zinc-900/80 border border-white/10 backdrop-blur-xl shadow-xl flex flex-col gap-1"
-			>
-				{
-					locales.map((lang) => (
+		<div class="flex items-center gap-x-1 font-mono text-xs" aria-label={t.navbar.language} role="group">
+			{
+				locales.map((lang, i) => (
+					<>
+						{i > 0 && <span class="text-muted" aria-hidden="true">/</span>}
 						<a
-							role="menuitem"
 							href={alternates.find((alt) => alt.locale === lang.locale)?.path}
-							class:list={[
-								'flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors hover:bg-white/5',
-								lang.locale === locale ? 'text-primary' : 'text-foreground',
-							]}
+							hreflang={lang.hreflang}
+							lang={lang.hreflang}
+							aria-current={lang.locale === locale ? 'true' : undefined}
+							title={lang.title}
+							class="px-1 py-1 text-muted hover:text-ink aria-[current]:text-rule aria-[current]:font-bold"
 						>
-							<img src={lang.flag} alt="" width="24" height="16" loading="lazy" class="rounded-sm" />
-							{lang.title}
+							{lang.locale === 'en' ? 'EN' : 'PT'}
 						</a>
-					))
-				}
-			</div>
+					</>
+				))
+			}
 		</div>
+
+		<button
+			type="button"
+			data-theme-toggle
+			data-label-light={t.navbar.themeLight}
+			data-label-dark={t.navbar.themeDark}
+			aria-label={t.navbar.themeDark}
+			class="grid place-items-center size-cell text-muted hover:text-ink transition-colors cursor-pointer"
+		>
+			<Moon class="size-4 dark:hidden" aria-hidden="true" />
+			<Sun class="size-4 hidden dark:block" aria-hidden="true" />
+		</button>
 	</div>
 </header>
 
+<nav
+	aria-label="Principal"
+	class="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-paper border-t-2 border-line grid grid-cols-4 text-center text-sm"
+>
+	{
+		navItems.map(({ name, href, id }) => (
+			<a
+				href={href}
+				data-nav-link={id}
+				aria-current={isBlog && id === 'blog' ? 'page' : undefined}
+				class="py-3 text-muted aria-[current]:text-ink aria-[current]:font-semibold"
+			>
+				{name}
+			</a>
+		))
+	}
+</nav>
+
 <script>
 	const navbar = document.querySelector<HTMLElement>('[data-navbar]');
-
 	const links = document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]');
-	const sections = ['hero', 'about', 'projects', 'contact']
-		.map((id) => document.getElementById(id))
-		.filter((section) => section !== null);
+	const onHome = !location.pathname.includes('/blog');
+	const sections = [...document.querySelectorAll<HTMLElement>('main > section[id]')];
 
-	const INACTIVE = ['text-muted-foreground', 'hover:text-foreground'];
-
-	function setActive(id: string) {
+	function setActive(id: string | null) {
 		for (const link of links) {
-			const isActive = link.dataset.navLink === id;
-			link.classList.toggle('bg-primary', isActive);
-			link.classList.toggle('text-primary-foreground', isActive);
-			for (const cls of INACTIVE) link.classList.toggle(cls, !isActive);
+			const target = link.dataset.navLink === 'blog' ? 'writing' : link.dataset.navLink;
+			if (target === id) link.setAttribute('aria-current', 'true');
+			else link.removeAttribute('aria-current');
 		}
 	}
 
 	function onScroll() {
-		if (navbar) navbar.toggleAttribute('data-scrolled', window.scrollY > 0);
-
-		if (sections.length === 0) return;
-		const current = sections.find((section) => {
-			const rect = section.getBoundingClientRect();
-			return rect.top >= 0 && rect.top <= 300;
-		});
-		if (current) setActive(current.id);
+		navbar?.toggleAttribute('data-scrolled', scrollY > 8);
+		if (!onHome) return;
+		let current: string | null = null;
+		for (const section of sections) {
+			if (section.getBoundingClientRect().top <= innerHeight * 0.4) current = section.id;
+		}
+		setActive(current);
 	}
 
-	window.addEventListener('scroll', onScroll, { passive: true });
+	addEventListener('scroll', onScroll, { passive: true });
 	onScroll();
 
-	const selector = document.querySelector<HTMLElement>('[data-language-selector]');
-	const trigger = selector?.querySelector('button');
-	const menu = selector?.querySelector<HTMLElement>('[role="menu"]');
-
-	if (selector && trigger && menu) {
-		const toggle = (open: boolean) => {
-			menu.hidden = !open;
-			trigger.setAttribute('aria-expanded', String(open));
-		};
-
-		trigger.addEventListener('click', () => toggle(Boolean(menu.hidden)));
-		document.addEventListener('click', (event) => {
-			if (!selector.contains(event.target as Node)) toggle(false);
-		});
-		document.addEventListener('keydown', (event) => {
-			if (event.key === 'Escape') toggle(false);
-		});
-	}
+	const toggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+	const syncLabel = () => {
+		if (!toggle) return;
+		const dark = document.documentElement.dataset.theme === 'dark';
+		toggle.setAttribute('aria-label', (dark ? toggle.dataset.labelLight : toggle.dataset.labelDark) ?? '');
+	};
+	syncLabel();
+	toggle?.addEventListener('click', () => {
+		const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+		document.documentElement.dataset.theme = next;
+		localStorage.setItem('theme', next);
+		syncLabel();
+	});
 </script>

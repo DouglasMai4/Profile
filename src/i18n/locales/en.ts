@@ -4,100 +4,90 @@ export const en: Dictionary = {
   meta: {
     title: "Douglas Maia | Full Stack Developer",
     description:
-      "Douglas Maia, Full Stack developer. Transforming complex ideas into high-performance code, with scalable architectures and immersive interfaces.",
+      "Douglas Maia, full stack developer from Joinville, Brazil. Go, TypeScript, distributed systems and AI. Projects, experience and a blog about what I learn along the way.",
     blogTitle: "Blog | Douglas Maia",
     blogDescription:
-      "Ideas and experiences about web development, software architecture and technology, by Douglas Maia.",
+      "Notes on web development, software architecture and technology, written by Douglas Maia.",
   },
   navbar: {
-    home: "Home",
-    about: "About",
-    projects: "Projects",
-    contact: "Contact",
+    work: "Work",
+    stack: "Stack",
     blog: "Blog",
-    language: "Change language",
+    contact: "Contact",
+    language: "Language",
+    themeLight: "Use light theme",
+    themeDark: "Use dark theme",
+    skip: "Skip to content",
   },
   hero: {
-    badge: "Full Stack Developer",
-    titleStart: "Creator of",
-    titleHighlight: " Digital Solutions",
-    description:
-      "Transforming complex ideas into high-performance code. Experts in building scalable architectures and immersive interfaces.",
-    explore: "Explore my projects",
-    talk: "Let's talk",
-    terminalReturn: "Incredible Solutions",
+    role: "full stack dev · Go & TypeScript",
+    intro:
+      "I live in Joinville, Brazil. Right now I own the architecture at Goalfy, run Kingdom Softwares, and mentor people moving into tech at Escola da Nuvem. This site is my notebook: what I do, what I do it with, and what I learn along the way.",
+    latest: "Latest post",
   },
-  about: {
-    badge: "About Me",
-    title: "Hello, I'm Douglas Maia!",
-    contentHtml:
-      'I\'m a <strong class="text-foreground">Full Stack</strong> developer passionate about transforming lines of code into real solutions. With solid experience in <strong class="text-foreground">web development</strong>, my mission is to create architectures that are not only functional, but also scalable and elegant. My career path spans from complex enterprise applications to process automation, always with an obsessive focus on <span class="text-primary underline decoration-primary/30 underline-offset-4">performance</span> and user experience.',
-    founderDescription:
-      "Software house focused on technical excellence and innovation.",
-    stacks: {
-      frontend: "Front-end",
+  api: {
+    title: "Query me",
+    note: "The API is fake. The data is real.",
+    label: "Route",
+    send: "Send",
+    hint: "Enter sends · ↑ ↓ history",
+    notFound: "That route doesn't exist. Try one of these:",
+    routes: "Routes",
+  },
+  work: {
+    title: "Work",
+    experience: "Where I've worked",
+    projects: "Things I've made",
+    now: "now",
+    building: "in progress",
+    live: "live",
+    links: { site: "Site", docs: "Docs", code: "Code" },
+    github: "More on GitHub",
+  },
+  stack: {
+    title: "Stack",
+    intro:
+      "Pick a technology and I'll show you where I've actually used it. No 80% React progress bars.",
+    areas: {
       backend: "Back-end",
-      database: "Database",
-      tools: "Tools",
+      frontend: "Front-end",
+      data: "Data",
+      ai: "AI",
+      infra: "Infra",
     },
+    usedIn: "Used at",
+    daily: "Everyday tool, on everything.",
   },
-  projects: {
-    badge: "Portfolio",
-    titleStart: "Selected",
-    titleHighlight: " Projects",
-    description:
-      "A collection of solved technical challenges, ranging from open-source applications to high-level enterprise systems.",
-    seeGithub: "View all repositories on GitHub",
-    test: "Test",
-    code: "Code",
-    docs: "Docs",
-    private: "Private",
-    privateCode: "Private Code",
-    completed: "Completed",
-    inDevelopment: "In Development",
-    items: {
-      kori: "HTTP toolkit for Go built on top of Chi — inspired by Hono and made idiomatic in Go. It makes building fast, organized and typed APIs simple.",
-      goalfy:
-        "CRM 360 with AI, WhatsApp and automations for sales operations, built for Brazilian sales teams. Where I currently work as a developer.",
-      kingdom:
-        "Software house focused on technical excellence and innovation, where I work as founder building tailor-made solutions.",
-      forge:
-        "CRM with native WhatsApp integration, centralizing leads, conversations, and sales routines in a single, fast, and scalable system.",
-    },
+  writing: {
+    title: "Writing",
+    intro: "I write when I learn something I wish I'd read earlier.",
+    all: "All posts",
   },
   contact: {
-    badge: "Contact",
-    titleLine1: "Let's build something",
-    titleLine2Highlight: "amazing together!",
-    descriptionHtml:
-      'I\'m always open to new challenges and partnerships. Choose your preferred channel and send a <strong>"Hello"</strong>.',
-    items: {
-      whatsapp: "Can we chat for a second?",
-      linkedin: "Connect professionally",
-      github: "Repositories and projects",
-      telegram: "Direct and secure chat",
-      email: "For detailed subjects",
-    },
+    title: "Want to talk?",
+    intro:
+      "About a project, a role, or just Go. Email is the surest way to reach me; WhatsApp is the fastest.",
   },
   footer: {
-    allRights: "All rights reserved.",
-    developedWith: "Developed with",
-    andCoffee: "and lots of coffee.",
+    made: "Made with Astro, on graph paper.",
+    top: "Back to top",
   },
   blog: {
-    badge: "Blog",
-    titleStart: "Ideas &",
-    titleHighlight: " Experiences",
+    title: "Blog",
     description:
-      "Sharing learnings about web development, software architecture and technology.",
-    readMore: "Read article",
-    backToBlog: "Back to blog",
+      "Notes on web development, architecture and whatever else comes up along the way.",
     minRead: "min read",
-    empty: "No articles published yet. Come back soon!",
-    latestTitleStart: "Latest",
-    latestTitleHighlight: " Article",
-    latestDescription:
-      "The most recent piece from my blog about development and technology.",
-    seeAll: "See all articles",
+    empty: "Nothing here yet. Come back soon!",
+    noMatch: "No posts with this tag.",
+    allTags: "All",
+    filter: "Filter by tag",
+    count: (n: number) => (n === 1 ? "1 post" : `${n} posts`),
+    backToBlog: "Back to blog",
+    share: "Share",
+    copy: "Copy link",
+    copied: "Link copied",
+    previous: "Previous post",
+    next: "Next post",
+    progress: "Reading progress",
   },
 };

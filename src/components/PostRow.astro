@@ -1,0 +1,38 @@
+---
+import { ArrowRight } from '@lucide/astro';
+
+import { getDict, localePath, type Locale } from '@/i18n';
+import { postSlug, readingTimeMinutes, type BlogPost } from '@/lib/blog';
+
+interface Props {
+	locale: Locale;
+	post: BlogPost;
+	headingLevel?: 'h2' | 'h3';
+}
+
+const { locale, post, headingLevel: Heading = 'h3' } = Astro.props;
+const t = getDict(locale);
+const date = post.data.pubDate;
+---
+
+<li class="sheet" data-tags={post.data.tags.join(' ')}>
+	<time class="in-margin margin-note pt-[calc(var(--cell)*0.75)] tabular" datetime={date.toISOString()}>
+		{date.toLocaleDateString(locale === 'pt-br' ? 'pt-BR' : 'en-US', { day: '2-digit', month: '2-digit', year: 'numeric' })}
+	</time>
+	<article class="group relative border-t-[1.5px] border-line py-[calc(var(--cell)*0.75)]">
+		<Heading class="flex items-start justify-between gap-6">
+			<a
+				href={localePath(locale, `/blog/${postSlug(post)}/`)}
+				class="text-[clamp(1.375rem,2.6vw,1.75rem)] leading-[calc(var(--cell)*1.5)] font-extrabold tracking-tight group-hover:text-ink transition-colors after:absolute after:inset-0"
+			>
+				{post.data.title}
+			</a>
+			<ArrowRight class="size-6 shrink-0 mt-1.5 text-ink transition-transform duration-300 group-hover:translate-x-1.5" aria-hidden="true" />
+		</Heading>
+		<p class="mt-[calc(var(--cell)*0.5)] max-w-[42rem] text-muted">{post.data.description}</p>
+		<p class="mt-[calc(var(--cell)*0.5)] font-mono text-xs text-muted">
+			{readingTimeMinutes(post.body)} {t.blog.minRead}
+			{post.data.tags.length > 0 && <span class="text-ink"> · {post.data.tags.map((tag) => `#${tag}`).join(' ')}</span>}
+		</p>
+	</article>
+</li>

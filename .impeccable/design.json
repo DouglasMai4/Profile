@@ -1,0 +1,414 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-07T20:53:22.196666+00:00",
+  "title": "Design System: Douglas Maia",
+  "extensions": {
+    "colorMeta": {
+      "ballpoint-ink": {
+        "role": "primary",
+        "displayName": "Ballpoint Ink",
+        "tonalRamp": [
+          "oklch(15% 0.075 268)",
+          "oklch(25% 0.105 268)",
+          "oklch(35% 0.135 268)",
+          "oklch(45% 0.165 268)",
+          "oklch(58% 0.156 268)",
+          "oklch(70% 0.12 268)",
+          "oklch(83% 0.081 268)",
+          "oklch(95% 0.045 268)"
+        ]
+      },
+      "ink-wash": {
+        "role": "primary",
+        "displayName": "Ink Wash",
+        "tonalRamp": [
+          "oklch(15% 0.075 268)",
+          "oklch(25% 0.105 268)",
+          "oklch(35% 0.135 268)",
+          "oklch(45% 0.165 268)",
+          "oklch(58% 0.156 268)",
+          "oklch(70% 0.12 268)",
+          "oklch(83% 0.081 268)",
+          "oklch(95% 0.045 268)"
+        ]
+      },
+      "margin-red": {
+        "role": "secondary",
+        "displayName": "Margin Red",
+        "tonalRamp": [
+          "oklch(15% 0.079 30)",
+          "oklch(25% 0.111 30)",
+          "oklch(35% 0.143 30)",
+          "oklch(45% 0.174 30)",
+          "oklch(58% 0.165 30)",
+          "oklch(70% 0.127 30)",
+          "oklch(83% 0.085 30)",
+          "oklch(95% 0.048 30)"
+        ]
+      },
+      "notebook-paper": {
+        "role": "neutral",
+        "displayName": "Notebook Paper",
+        "tonalRamp": [
+          "oklch(15% 0.004 250)",
+          "oklch(25% 0.006 250)",
+          "oklch(35% 0.007 250)",
+          "oklch(45% 0.009 250)",
+          "oklch(58% 0.009 250)",
+          "oklch(70% 0.007 250)",
+          "oklch(83% 0.004 250)",
+          "oklch(95% 0.003 250)"
+        ]
+      },
+      "grid-blue": {
+        "role": "neutral",
+        "displayName": "Grid Blue",
+        "tonalRamp": [
+          "oklch(15% 0.017 250)",
+          "oklch(25% 0.023 250)",
+          "oklch(35% 0.03 250)",
+          "oklch(45% 0.037 250)",
+          "oklch(58% 0.035 250)",
+          "oklch(70% 0.027 250)",
+          "oklch(83% 0.018 250)",
+          "oklch(95% 0.01 250)"
+        ]
+      },
+      "navy-text": {
+        "role": "neutral",
+        "displayName": "Navy Text",
+        "tonalRamp": [
+          "oklch(15% 0.029 265)",
+          "oklch(25% 0.041 265)",
+          "oklch(35% 0.053 265)",
+          "oklch(45% 0.064 265)",
+          "oklch(58% 0.061 265)",
+          "oklch(70% 0.047 265)",
+          "oklch(83% 0.032 265)",
+          "oklch(95% 0.018 265)"
+        ]
+      },
+      "pencil-muted": {
+        "role": "neutral",
+        "displayName": "Pencil Muted",
+        "tonalRamp": [
+          "oklch(15% 0.021 265)",
+          "oklch(25% 0.029 265)",
+          "oklch(35% 0.038 265)",
+          "oklch(45% 0.046 265)",
+          "oklch(58% 0.043 265)",
+          "oklch(70% 0.033 265)",
+          "oklch(83% 0.022 265)",
+          "oklch(95% 0.013 265)"
+        ]
+      },
+      "rule-line": {
+        "role": "neutral",
+        "displayName": "Rule Line",
+        "tonalRamp": [
+          "oklch(15% 0.029 265)",
+          "oklch(25% 0.041 265)",
+          "oklch(35% 0.053 265)",
+          "oklch(45% 0.064 265)",
+          "oklch(58% 0.061 265)",
+          "oklch(70% 0.047 265)",
+          "oklch(83% 0.032 265)",
+          "oklch(95% 0.018 265)"
+        ]
+      },
+      "night-paper": {
+        "role": "neutral",
+        "displayName": "Night Paper",
+        "tonalRamp": [
+          "oklch(15% 0.029 265)",
+          "oklch(25% 0.041 265)",
+          "oklch(35% 0.053 265)",
+          "oklch(45% 0.064 265)",
+          "oklch(58% 0.061 265)",
+          "oklch(70% 0.047 265)",
+          "oklch(83% 0.032 265)",
+          "oklch(95% 0.018 265)"
+        ]
+      },
+      "night-grid": {
+        "role": "neutral",
+        "displayName": "Night Grid",
+        "tonalRamp": [
+          "oklch(15% 0.029 265)",
+          "oklch(25% 0.041 265)",
+          "oklch(35% 0.053 265)",
+          "oklch(45% 0.064 265)",
+          "oklch(58% 0.061 265)",
+          "oklch(70% 0.047 265)",
+          "oklch(83% 0.032 265)",
+          "oklch(95% 0.018 265)"
+        ]
+      },
+      "night-ink": {
+        "role": "primary",
+        "displayName": "Night Ink",
+        "tonalRamp": [
+          "oklch(15% 0.062 268)",
+          "oklch(25% 0.087 268)",
+          "oklch(35% 0.112 268)",
+          "oklch(45% 0.137 268)",
+          "oklch(58% 0.13 268)",
+          "oklch(70% 0.1 268)",
+          "oklch(83% 0.067 268)",
+          "oklch(95% 0.037 268)"
+        ]
+      },
+      "night-ink-wash": {
+        "role": "primary",
+        "displayName": "Night Ink Wash",
+        "tonalRamp": [
+          "oklch(15% 0.062 268)",
+          "oklch(25% 0.087 268)",
+          "oklch(35% 0.112 268)",
+          "oklch(45% 0.137 268)",
+          "oklch(58% 0.13 268)",
+          "oklch(70% 0.1 268)",
+          "oklch(83% 0.067 268)",
+          "oklch(95% 0.037 268)"
+        ]
+      },
+      "night-text": {
+        "role": "neutral",
+        "displayName": "Night Text",
+        "tonalRamp": [
+          "oklch(15% 0.012 265)",
+          "oklch(25% 0.017 265)",
+          "oklch(35% 0.022 265)",
+          "oklch(45% 0.027 265)",
+          "oklch(58% 0.026 265)",
+          "oklch(70% 0.02 265)",
+          "oklch(83% 0.013 265)",
+          "oklch(95% 0.007 265)"
+        ]
+      },
+      "night-muted": {
+        "role": "neutral",
+        "displayName": "Night Muted",
+        "tonalRamp": [
+          "oklch(15% 0.017 265)",
+          "oklch(25% 0.023 265)",
+          "oklch(35% 0.03 265)",
+          "oklch(45% 0.037 265)",
+          "oklch(58% 0.035 265)",
+          "oklch(70% 0.027 265)",
+          "oklch(83% 0.018 265)",
+          "oklch(95% 0.01 265)"
+        ]
+      },
+      "night-margin-red": {
+        "role": "secondary",
+        "displayName": "Night Margin Red",
+        "tonalRamp": [
+          "oklch(15% 0.075 30)",
+          "oklch(25% 0.105 30)",
+          "oklch(35% 0.135 30)",
+          "oklch(45% 0.165 30)",
+          "oklch(58% 0.156 30)",
+          "oklch(70% 0.12 30)",
+          "oklch(83% 0.081 30)",
+          "oklch(95% 0.045 30)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "One per page: hero name, blog index title."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles with the drawn underline rule."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Post rows, companies, projects, stack detail."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Running text on the 24px cell baseline, ss01 on."
+      },
+      "prose": {
+        "displayName": "Prose",
+        "purpose": "Blog article body via prose-notebook."
+      },
+      "label": {
+        "displayName": "Margin Note",
+        "purpose": "Red mono dates, counts, statuses in the margin column; also tech lists and playground meta in other colors."
+      }
+    },
+    "shadows": [
+      {
+        "name": "overprint",
+        "value": "3px 3px 0 color-mix(in oklab, var(--ink) 30%, transparent)",
+        "purpose": "Text-shadow only, on place names when a Stack tech that used them is selected. State-only; never on boxes or at rest."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-ink",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Every stroke/clip reveal: margin rule, section underline, response unroll, overprint."
+      },
+      {
+        "name": "draw-rule",
+        "value": "900ms",
+        "purpose": "Margin rule on load and section-title underline on enter-view."
+      },
+      {
+        "name": "response-unroll",
+        "value": "420ms",
+        "purpose": "Playground response top-down clip reveal."
+      },
+      {
+        "name": "state-color",
+        "value": "160ms ease-out",
+        "purpose": "Chip fill/color changes."
+      },
+      {
+        "name": "arrow-nudge",
+        "value": "300ms",
+        "purpose": "Trailing arrows translate on row/link hover."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Square cell-tall toggle for stack selection, tag filters and playground routes.",
+      "html": "<div style=\"display:flex;gap:6px\"><button class=\"ds-chip\" aria-pressed=\"true\">Go</button><button class=\"ds-chip\" aria-pressed=\"false\">TypeScript</button><button class=\"ds-chip\" aria-pressed=\"false\">PostgreSQL</button></div>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;height:24px;padding:0 12px;border:1.5px solid var(--ink,#1d3aa6);background:transparent;color:var(--ink,#1d3aa6);font-family:'Schibsted Grotesk Variable',system-ui,sans-serif;font-size:.875rem;line-height:1;border-radius:0;cursor:pointer;transition:background-color 160ms ease-out,color 160ms ease-out}.ds-chip:hover{background:var(--ink-soft,#1d3aa614)}.ds-chip[aria-pressed='true']{background:var(--ink,#1d3aa6);color:var(--paper,#fbfcfe)}.ds-chip:focus-visible{outline:2px solid var(--rule,#dc4436);outline-offset:3px}"
+    },
+    {
+      "name": "Ink Box",
+      "kind": "card",
+      "refersTo": "ink-box",
+      "description": "Opaque paper container drawn with a 2px ink stroke; stack detail and playground shell.",
+      "html": "<div class=\"ds-ink-box\"><p class=\"ds-ink-box-title\">Go</p><p class=\"ds-ink-box-meta\">Goalfy · Kori · Fio</p></div>",
+      "css": ".ds-ink-box{border:2px solid var(--ink,#1d3aa6);background:var(--paper,#fbfcfe);padding:24px;border-radius:0;color:var(--text,#15213d);font-family:'Schibsted Grotesk Variable',system-ui,sans-serif;max-width:22rem}.ds-ink-box-title{margin:0;font-size:2rem;line-height:48px;font-weight:800;letter-spacing:-.025em}.ds-ink-box-meta{margin:0;font-weight:600;color:var(--ink,#1d3aa6)}"
+    },
+    {
+      "name": "Ink Link",
+      "kind": "button",
+      "refersTo": "ink-link",
+      "description": "The system's action affordance: ink text with a 35% ink underline that firms on hover.",
+      "html": "<a href=\"#\" class=\"ds-ink-link\">Todos os textos <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a>",
+      "css": ".ds-ink-link{display:inline-flex;align-items:center;gap:4px;color:var(--ink,#1d3aa6);font-family:'Schibsted Grotesk Variable',system-ui,sans-serif;font-weight:600;text-decoration:underline;text-decoration-thickness:1.5px;text-underline-offset:.22em;text-decoration-color:color-mix(in oklab,var(--ink,#1d3aa6) 35%,transparent)}.ds-ink-link:hover{text-decoration-color:var(--ink,#1d3aa6)}.ds-ink-link svg{transition:transform 300ms cubic-bezier(0.16, 1, 0.3, 1)}.ds-ink-link:hover svg{transform:translateX(4px)}.ds-ink-link:focus-visible{outline:2px solid var(--rule,#dc4436);outline-offset:3px}"
+    },
+    {
+      "name": "Request Line",
+      "kind": "input",
+      "refersTo": "ink-box",
+      "description": "Playground input: transparent mono field on a 2px ink underline with a red GET verb.",
+      "html": "<form class=\"ds-request\"><label for=\"ds-route\" class=\"ds-request-verb\">GET</label><input id=\"ds-route\" class=\"ds-request-input\" value=\"/douglas/stack?area=backend\"></form>",
+      "css": ".ds-request{display:flex;align-items:stretch;border-bottom:2px solid var(--ink,#1d3aa6);max-width:26rem;font-family:'JetBrains Mono Variable',ui-monospace,monospace;font-size:.875rem}.ds-request-verb{font-weight:700;color:var(--rule,#dc4436);padding:8px 8px 8px 0}.ds-request-input{flex:1;min-width:0;border:0;background:transparent;color:var(--text,#15213d);font:inherit;padding:8px 0;outline:none;caret-color:var(--rule,#dc4436)}.ds-request:focus-within{outline:2px solid var(--rule,#dc4436);outline-offset:3px}"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Sticky opaque paper header; current link in ink with a red underline drawn from the left.",
+      "html": "<header class=\"ds-nav\"><a href=\"#\" class=\"ds-nav-name\">Douglas Maia</a><nav class=\"ds-nav-links\"><a href=\"#\" aria-current=\"page\">Blog</a><a href=\"#\">Trabalho</a><a href=\"#\">Stack</a><a href=\"#\">Contato</a></nav><span class=\"ds-nav-lang\"><b>PT</b> / EN</span></header>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:24px;height:72px;padding:0 24px;background:var(--paper,#fbfcfe);border-bottom:2px solid var(--line,#15213d);font-family:'Schibsted Grotesk Variable',system-ui,sans-serif}.ds-nav-name{margin-right:auto;font-weight:800;font-size:1.125rem;letter-spacing:-.025em;color:var(--text,#15213d);text-decoration:none}.ds-nav-links{display:flex;gap:24px;font-size:.9375rem}.ds-nav-links a{position:relative;padding:4px 0;color:var(--muted,#4b5877);text-decoration:none;transition:color 150ms}.ds-nav-links a::after{content:'';position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--rule,#dc4436);transform:scaleX(0);transform-origin:left;transition:transform 300ms}.ds-nav-links a:hover{color:var(--ink,#1d3aa6)}.ds-nav-links a[aria-current]{color:var(--ink,#1d3aa6);font-weight:600}.ds-nav-links a[aria-current]::after{transform:scaleX(1)}.ds-nav-links a:focus-visible{outline:2px solid var(--rule,#dc4436);outline-offset:3px}.ds-nav-lang{font-family:'JetBrains Mono Variable',ui-monospace,monospace;font-size:.75rem;color:var(--muted,#4b5877)}.ds-nav-lang b{color:var(--rule,#dc4436)}"
+    },
+    {
+      "name": "Post Row",
+      "kind": "custom",
+      "refersTo": "margin-note",
+      "description": "Writing index entry: red mono date in the margin, rule line, heavy title, muted description, read-time and ink tags.",
+      "html": "<div class=\"ds-row\"><time class=\"ds-row-note\">04/08/2026</time><a href=\"#\" class=\"ds-row-body\"><span class=\"ds-row-title\">Do React ao Astro: reconstruindo meu portfólio <span aria-hidden=\"true\" class=\"ds-row-arrow\">→</span></span><span class=\"ds-row-desc\">Por que troquei de framework e o que aprendi.</span><span class=\"ds-row-meta\">6 min · <i>#astro</i></span></a></div>",
+      "css": ".ds-row{display:grid;grid-template-columns:168px minmax(0,1fr);font-family:'Schibsted Grotesk Variable',system-ui,sans-serif;color:var(--text,#15213d)}.ds-row-note{padding:18px 24px 0 0;text-align:right;font-family:'JetBrains Mono Variable',ui-monospace,monospace;font-size:.75rem;line-height:24px;letter-spacing:.02em;color:var(--rule,#dc4436)}.ds-row-body{display:block;padding:18px 0 18px 24px;border-top:1.5px solid var(--line,#15213d);color:inherit;text-decoration:none}.ds-row-title{display:flex;justify-content:space-between;gap:24px;font-size:1.75rem;line-height:36px;font-weight:800;letter-spacing:-.025em;transition:color 150ms}.ds-row-arrow{color:var(--ink,#1d3aa6);transition:transform 300ms}.ds-row-body:hover .ds-row-title{color:var(--ink,#1d3aa6)}.ds-row-body:hover .ds-row-arrow{transform:translateX(6px)}.ds-row-body:focus-visible{outline:2px solid var(--rule,#dc4436);outline-offset:3px}.ds-row-desc{display:block;margin-top:12px;color:var(--muted,#4b5877)}.ds-row-meta{display:block;margin-top:12px;font-family:'JetBrains Mono Variable',ui-monospace,monospace;font-size:.75rem;color:var(--muted,#4b5877)}.ds-row-meta i{font-style:normal;color:var(--ink,#1d3aa6)}"
+    },
+    {
+      "name": "Section Title",
+      "kind": "custom",
+      "description": "Headline with a 2px rule underline that strokes in from the left.",
+      "html": "<h2 class=\"ds-section-title\">Escrevendo</h2>",
+      "css": ".ds-section-title{position:relative;margin:0;padding-bottom:24px;font-family:'Schibsted Grotesk Variable',system-ui,sans-serif;font-size:3rem;line-height:48px;font-weight:800;letter-spacing:-.035em;color:var(--text,#15213d)}.ds-section-title::after{content:'';position:absolute;left:0;right:0;bottom:11px;height:2px;background:var(--line,#15213d);transform-origin:left;animation:ds-draw 900ms cubic-bezier(0.16, 1, 0.3, 1) both}@keyframes ds-draw{from{transform:scaleX(0)}}@media (prefers-reduced-motion:reduce){.ds-section-title::after{animation:none}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Caderno Quadriculado",
+    "overview": "Every page is a sheet of an engineer's graph-paper notebook: cool white paper, a faint blue 24px grid drawn across the whole canvas, one red margin rule fixed at the left edge, and a single ballpoint-blue ink for anything you can act on. Navy-black carries reading text. The page is not decorated; it is written on. Dates, counts and statuses live in the margin column in small red monospaced numerals, the way a pen notes things beside the work.\n\nDensity is calm and vertical. Each page region holds one subject, and the empty grid around it is left charged rather than filled. Every vertical measure, line-height and gap resolves to a multiple or half of the cell, so text sits on the grid lines. Components are square-cornered boxes drawn with 1.5–2px ink strokes. The world has no shadows, gradients, glass or rounded corners. Motion is ink being drawn: rules stroke in, responses unroll top-down, and nothing floats.\n\nAt night the same notebook is used under lamp light: navy paper, dark-blue grid, pale-blue ink, coral margin rule. Structure and roles stay identical; only the values swap.",
+    "keyCharacteristics": [
+      "Full-canvas 24px graph grid on paper, with a fixed 2px red margin rule.",
+      "Two-column sheet: margin column (7 cells desktop, 1.5 cells mobile) plus writing column (max 50 cells).",
+      "One ink hue carries text links, chips, boxes and action; red is reserved for the margin, focus and active state.",
+      "Square corners, 1.5–2px solid strokes, zero elevation.",
+      "Heavy-weight grotesk headings with tight tracking; monospace only for margin notes, code and the API playground.",
+      "Stroke-reveal motion on a single expo-out curve; everything is legible with motion off."
+    ],
+    "rules": [
+      {
+        "name": "The One Ink Rule",
+        "body": "Ballpoint Ink is the only hue that means \"you can act on this\". No second accent, no per-section colors.",
+        "section": "colors"
+      },
+      {
+        "name": "The Red Pen Rule",
+        "body": "Margin Red appears only in the margin, as focus, or as an active/error state. It never fills a surface and never carries body text.",
+        "section": "colors"
+      },
+      {
+        "name": "The Baseline Rule",
+        "body": "Line-heights are cell multiples (24px, 36px, 48px, 60px). If a new size can't sit on the grid, choose its leading so it does.",
+        "section": "typography"
+      },
+      {
+        "name": "The Mono Means Data Rule",
+        "body": "Monospace is for dates, counts, routes, code and tech names. Prose, headings and buttons stay in the grotesk.",
+        "section": "typography"
+      },
+      {
+        "name": "The Drawn Not Lifted Rule",
+        "body": "A surface is separated by a stroke, never by a shadow or a tint.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Overprint Exception",
+        "body": "The one offset in the system is the Stack overprint: when a tech is selected, the names of places that used it get a `3px 3px 0` text-shadow of ink at 30%, like a second print layer slightly off-register. It is a state, scoped to that cross-reference, never a resting decoration and never on boxes.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** put every new row inside the sheet grid so its content shares the margin column and the writing column's left edge.",
+      "**Do** size line-heights and vertical gaps in cells or half-cells (24px / 12px).",
+      "**Do** use Ballpoint Ink for every interactive element and Margin Red only for margin notes, focus, the active marker and errors.",
+      "**Do** draw containers with 2px ink strokes on opaque paper, square-cornered.",
+      "**Do** animate with stroke or clip reveals on `cubic-bezier(0.16, 1, 0.3, 1)`, and render the finished state when `prefers-reduced-motion: reduce`.",
+      "**Do** keep the night theme a value swap of the same roles, not a different layout or palette."
+    ],
+    "donts": [
+      "**Don't** add box shadows, gradients, glass/blur or rounded corners.",
+      "**Don't** introduce a second accent hue or tinted surface beyond Ink Wash.",
+      "**Don't** use Margin Red for body text, fills or buttons.",
+      "**Don't** use the dark-terminal-plus-neon dev portfolio look or a split hero over a row of cards.",
+      "**Don't** add floating, parallax or particle motion.",
+      "**Don't** put uppercase mono labels above headings as eyebrows; margin notes sit beside content, in the margin, in natural case."
+    ]
+  }
+}

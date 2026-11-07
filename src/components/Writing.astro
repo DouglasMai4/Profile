@@ -1,0 +1,37 @@
+---
+import { ArrowRight } from '@lucide/astro';
+
+import PostRow from '@/components/PostRow.astro';
+import { getDict, localePath, type Locale } from '@/i18n';
+import { getPosts } from '@/lib/blog';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDict(locale);
+const all = await getPosts(locale);
+// The newest post already leads the hero; list only the ones after it.
+const posts = all.slice(1, 4);
+---
+
+{
+	all.length > 0 && (
+		<section id="writing" class="pt-[calc(var(--cell)*6)]" aria-labelledby="writing-title">
+			<div class="sheet">
+				<h2 id="writing-title" class="section-title">{t.writing.title}</h2>
+			</div>
+			<p class="sheet mt-cell"><span class="max-w-[40rem] block text-muted">{t.writing.intro}</span></p>
+			{posts.length > 0 && <ul class="mt-[calc(var(--cell)*1.5)]">
+				{posts.map((post) => <PostRow locale={locale} post={post} />)}
+			</ul>}
+			<p class="sheet mt-cell">
+				<a href={localePath(locale, '/blog/')} class="ink-link inline-flex items-center gap-1 border-t-[1.5px] border-line pt-cell w-full">
+					{t.writing.all}
+					<ArrowRight class="size-4" aria-hidden="true" />
+				</a>
+			</p>
+		</section>
+	)
+}

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+	<style>
+		.paper { fill: #fbfcfe; }
+		.grid { stroke: #dde7f3; }
+		.ink { fill: #15213d; }
+		@media (prefers-color-scheme: dark) {
+			.paper { fill: #0e1730; }
+			.grid { stroke: #24345c; }
+			.ink { fill: #e7ecf8; }
+		}
+	</style>
+	<rect class="paper" width="32" height="32" />
+	<path class="grid" stroke-width="1" d="M0 8.5H32M0 16.5H32M0 24.5H32M16.5 0V32M24.5 0V32" />
+	<rect x="6" width="2" height="32" fill="#dc4436" />
+	<path class="ink" fill-rule="evenodd" d="M11 6h7a10 10 0 0 1 0 20h-7Zm4.5 4.5v11H18a5.5 5.5 0 0 0 0-11Z" />
+</svg>

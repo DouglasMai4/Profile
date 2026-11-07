@@ -1,12 +1,12 @@
 ---
 import { render } from 'astro:content';
-import { ArrowLeft, CalendarDays, Clock } from '@lucide/astro';
+import { ArrowLeft, ArrowRight, Link2 } from '@lucide/astro';
 
 import Footer from '@/components/Footer.astro';
 import Navbar from '@/components/Navbar.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { getDict, localePath, type Locale } from '@/i18n';
-import { formatDate, postSlug, readingTimeMinutes, type BlogPost } from '@/lib/blog';
+import { formatDate, getPosts, postSlug, readingTimeMinutes, type BlogPost } from '@/lib/blog';
 
 interface Props {
 	locale: Locale;
@@ -16,6 +16,18 @@ interface Props {
 const { locale, post } = Astro.props;
 const t = getDict(locale);
 const path = `/blog/${postSlug(post)}/`;
+const url = new URL(localePath(locale, path), Astro.site).href;
+
+const posts = await getPosts(locale);
+const index = posts.findIndex((p) => p.id === post.id);
+const newer = index > 0 ? posts[index - 1] : undefined;
+const older = index < posts.length - 1 ? posts[index + 1] : undefined;
+
+const share = [
+	{ name: 'LinkedIn', href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}` },
+	{ name: 'WhatsApp', href: `https://wa.me/?text=${encodeURIComponent(`${post.data.title} ${url}`)}` },
+	{ name: 'X', href: `https://x.com/intent/post?text=${encodeURIComponent(post.data.title)}&url=${encodeURIComponent(url)}` },
+];
 
 const { Content } = await render(post);
 ---
@@ -28,59 +40,139 @@ const { Content } = await render(post);
 	type="article"
 	publishedTime={post.data.pubDate}
 >
-	<main class="min-h-dvh py-24 md:pt-32 px-4 relative overflow-hidden bg-background">
-		<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-96 bg-primary/5 blur-[120px] rounded-full pointer-events-none"></div>
+	<div class="reading-progress" aria-hidden="true" data-progress></div>
+	<Navbar locale={locale} path={path} />
 
-		<article class="container mx-auto max-w-3xl relative z-10">
-			<a
-				href={localePath(locale, '/blog/')}
-				class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors mb-8 group"
-			>
-				<ArrowLeft class="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-				{t.blog.backToBlog}
-			</a>
-
-			<header class="mb-10 space-y-4">
-				<div class="flex flex-wrap items-center gap-4 text-xs text-muted-foreground font-mono">
-					<span class="flex items-center gap-1.5">
-						<CalendarDays class="w-3.5 h-3.5" />
-						<time datetime={post.data.pubDate.toISOString()}>
-							{formatDate(post.data.pubDate, locale)}
-						</time>
-					</span>
-					<span class="flex items-center gap-1.5">
-						<Clock class="w-3.5 h-3.5" />
-						{readingTimeMinutes(post.body)} {t.blog.minRead}
-					</span>
+	<main id="main" class="pt-[calc(var(--cell)*3)]">
+		<article>
+			<header id="top" class="sheet">
+				<p class="in-margin margin-note pt-[calc(var(--cell)*2.5)] tabular hidden md:block">
+					<time datetime={post.data.pubDate.toISOString()}>{post.data.pubDate.toLocaleDateString(locale === 'pt-br' ? 'pt-BR' : 'en-US', { day: '2-digit', month: '2-digit', year: 'numeric' })}</time><br />
+					{readingTimeMinutes(post.body)} {t.blog.minRead}
+				</p>
+				<div>
+					<a href={localePath(locale, '/blog/')} class="ink-link inline-flex items-center gap-1 text-sm">
+						<ArrowLeft class="size-4" aria-hidden="true" />
+						{t.blog.backToBlog}
+					</a>
+					<p class="md:hidden mt-cell margin-note">
+						{formatDate(post.data.pubDate, locale)} · {readingTimeMinutes(post.body)} {t.blog.minRead}
+					</p>
+					<h1 class="mt-cell max-w-[48rem] text-[clamp(2.25rem,6vw,4rem)] leading-[1.05] font-extrabold tracking-[-0.035em]">
+						{post.data.title}
+					</h1>
+					<p class="mt-cell max-w-[42rem] text-lg leading-[calc(var(--cell)*1.25)] text-muted">{post.data.description}</p>
+					{
+						post.data.tags.length > 0 && (
+							<p class="mt-cell flex flex-wrap gap-1.5">
+								{post.data.tags.map((tag) => (
+									<a href={`${localePath(locale, '/blog/')}?tag=${encodeURIComponent(tag)}`} class="chip">
+										#{tag}
+									</a>
+								))}
+							</p>
+						)
+					}
 				</div>
-
-				<h1 class="text-3xl md:text-5xl font-bold font-mono tracking-tight text-foreground">
-					{post.data.title}
-				</h1>
-
-				<p class="text-lg text-muted-foreground leading-relaxed">{post.data.description}</p>
-
-				{
-					post.data.tags.length > 0 && (
-						<div class="flex flex-wrap gap-2">
-							{post.data.tags.map((tag) => (
-								<span class="text-xs px-2 py-1 rounded bg-primary/10 text-primary border border-primary/20">
-									{tag}
-								</span>
-							))}
-						</div>
-					)
-				}
 			</header>
 
-			<div
-				class="prose prose-invert prose-headings:font-mono prose-a:text-primary prose-a:decoration-primary/30 prose-a:underline-offset-4 prose-code:text-primary prose-pre:bg-zinc-900 prose-pre:border prose-pre:border-white/5 max-w-none"
-			>
-				<Content />
+			<div class="sheet mt-[calc(var(--cell)*2)]">
+				<div class="prose prose-notebook max-w-[42rem] border-t-2 border-line pt-cell">
+					<Content />
+				</div>
 			</div>
-		</article>
-	</main>
 
+			<footer class="sheet mt-[calc(var(--cell)*3)]">
+				<p class="in-margin margin-note pt-cell uppercase">{t.blog.share}</p>
+				<div class="max-w-[42rem] flex flex-wrap items-center gap-x-5 gap-y-2 border-t-2 border-line pt-cell">
+					<button type="button" class="chip gap-1.5" data-copy={url} data-copied={t.blog.copied}>
+						<Link2 class="size-3.5" aria-hidden="true" />
+						<span>{t.blog.copy}</span>
+					</button>
+					{
+						share.map(({ name, href }) => (
+							<a href={href} target="_blank" rel="noopener noreferrer" class="ink-link text-sm">
+								{name}
+							</a>
+						))
+					}
+					<span class="sr-only" role="status" data-copy-status></span>
+				</div>
+			</footer>
+		</article>
+
+		{
+			(older || newer) && (
+				<nav class="sheet mt-[calc(var(--cell)*3)]" aria-label="Posts">
+					<div class="max-w-[42rem] grid sm:grid-cols-2 gap-cell">
+						{older ? (
+							<a href={localePath(locale, `/blog/${postSlug(older)}/`)} class="group ink-box p-cell hover:bg-ink-soft transition-colors">
+								<span class="margin-note inline-flex items-center gap-1">
+									<ArrowLeft class="size-3" aria-hidden="true" />
+									{t.blog.previous}
+								</span>
+								<span class="block mt-1 font-extrabold text-lg leading-[calc(var(--cell)*1.1)] group-hover:text-ink">{older.data.title}</span>
+							</a>
+						) : (
+							<span class="hidden sm:block" />
+						)}
+						{newer && (
+							<a href={localePath(locale, `/blog/${postSlug(newer)}/`)} class="group ink-box p-cell text-right hover:bg-ink-soft transition-colors">
+								<span class="margin-note inline-flex items-center gap-1">
+									{t.blog.next}
+									<ArrowRight class="size-3" aria-hidden="true" />
+								</span>
+								<span class="block mt-1 font-extrabold text-lg leading-[calc(var(--cell)*1.1)] group-hover:text-ink">{newer.data.title}</span>
+							</a>
+						)}
+					</div>
+				</nav>
+			)
+		}
+	</main>
 	<Footer locale={locale} />
-	<Navbar locale={locale} path={path} />
 </BaseLayout>
+
+<style>
+	/* Reading progress inks over the red margin rule, top to bottom. */
+	.reading-progress {
+		position: fixed;
+		inset-block: 0;
+		left: calc(var(--margin) - 2px);
+		width: 2px;
+		z-index: 2;
+		background: var(--ink);
+		transform-origin: top;
+		transform: scaleY(var(--progress, 0));
+	}
+</style>
+
+<script>
+	const bar = document.querySelector<HTMLElement>('[data-progress]');
+	const update = () => {
+		const max = document.documentElement.scrollHeight - innerHeight;
+		bar?.style.setProperty('--progress', String(max > 0 ? Math.min(1, scrollY / max) : 1));
+	};
+	addEventListener('scroll', update, { passive: true });
+	addEventListener('resize', update);
+	update();
+
+	const copy = document.querySelector<HTMLButtonElement>('[data-copy]');
+	const status = document.querySelector<HTMLElement>('[data-copy-status]');
+	copy?.addEventListener('click', async () => {
+		const label = copy.querySelector('span');
+		const original = label?.textContent ?? '';
+		try {
+			await navigator.clipboard.writeText(copy.dataset.copy ?? location.href);
+			if (label) label.textContent = copy.dataset.copied ?? '';
+			if (status) status.textContent = copy.dataset.copied ?? '';
+			copy.setAttribute('aria-pressed', 'true');
+			setTimeout(() => {
+				if (label) label.textContent = original;
+				copy.setAttribute('aria-pressed', 'false');
+			}, 2000);
+		} catch {
+			prompt('', copy.dataset.copy ?? location.href);
+		}
+	});
+</script>

@@ -1,104 +1,318 @@
 @import 'tailwindcss';
+@import '@fontsource-variable/schibsted-grotesk';
+@import '@fontsource-variable/jetbrains-mono';
 
 @plugin "@tailwindcss/typography";
 
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* Caderno quadriculado: paper, blue grid, one ink, one red margin rule. */
 :root {
-	--radius: 0.625rem;
-	--background: oklch(18.15% 0 0);
-	--foreground: oklch(100% 0 0);
-	--card: oklch(18.15% 0 0);
-	--card-foreground: oklch(100% 0 0);
-	--primary: oklch(84% 0.132 235);
-	--primary-foreground: oklch(15% 0.03 245);
-	--secondary: oklch(27.41% 0.0055 286.03);
-	--secondary-foreground: oklch(100% 0 0);
-	--muted: oklch(27.41% 0.0055 286.03);
-	--muted-foreground: oklch(71.19% 0.0129 286.07);
-	--accent: oklch(27.41% 0.0055 286.03);
-	--accent-foreground: oklch(100% 0 0);
-	--destructive: oklch(39.59% 0.1331 25.72);
-	--border: oklch(27.41% 0.0055 286.03);
-	--input: oklch(27.41% 0.0055 286.03);
-	--ring: oklch(84% 0.132 235);
+	--cell: 24px;
+	--margin: calc(var(--cell) * 7);
+	--paper: #fbfcfe;
+	--grid: #dde7f3;
+	--ink: #1d3aa6;
+	--ink-soft: #1d3aa614;
+	--text: #15213d;
+	--muted: #4b5877;
+	--rule: #dc4436;
+	--line: #15213d;
+	color-scheme: light;
+}
+
+[data-theme='dark'] {
+	--paper: #0e1730;
+	--grid: #19274a;
+	--ink: #93b2ff;
+	--ink-soft: #93b2ff1f;
+	--text: #e7ecf8;
+	--muted: #a6b2cc;
+	--rule: #ff7262;
+	--line: #e7ecf8;
+	color-scheme: dark;
+}
+
+@media (max-width: 767px) {
+	:root {
+		--margin: calc(var(--cell) * 1.5);
+	}
 }
 
 @theme inline {
-	--radius-sm: calc(var(--radius) - 4px);
-	--radius-md: calc(var(--radius) - 2px);
-	--radius-lg: var(--radius);
-	--radius-xl: calc(var(--radius) + 4px);
-	--color-background: var(--background);
-	--color-foreground: var(--foreground);
-	--color-card: var(--card);
-	--color-card-foreground: var(--card-foreground);
-	--color-primary: var(--primary);
-	--color-primary-foreground: var(--primary-foreground);
-	--color-secondary: var(--secondary);
-	--color-secondary-foreground: var(--secondary-foreground);
+	--font-sans: 'Schibsted Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+	--color-paper: var(--paper);
+	--color-grid: var(--grid);
+	--color-ink: var(--ink);
+	--color-ink-soft: var(--ink-soft);
+	--color-text: var(--text);
 	--color-muted: var(--muted);
-	--color-muted-foreground: var(--muted-foreground);
-	--color-accent: var(--accent);
-	--color-accent-foreground: var(--accent-foreground);
-	--color-destructive: var(--destructive);
-	--color-border: var(--border);
-	--color-input: var(--input);
-	--color-ring: var(--ring);
+	--color-rule: var(--rule);
+	--color-line: var(--line);
+	--spacing-cell: var(--cell);
 }
 
 @layer base {
-	* {
-		@apply border-border outline-ring/50;
-	}
-
-	::selection {
-		@apply bg-primary text-primary-foreground;
-	}
-
 	html {
-		@apply scroll-smooth;
+		background-color: var(--paper);
+		background-image:
+			linear-gradient(var(--grid) 1px, transparent 1px),
+			linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+		background-size: var(--cell) var(--cell);
+		scroll-behavior: smooth;
+		scroll-padding-top: calc(var(--cell) * 4);
+		scrollbar-color: var(--ink) var(--paper);
 	}
 
 	body {
-		@apply bg-background text-foreground;
+		@apply font-sans text-text antialiased;
+		font-size: 1.0625rem;
+		line-height: var(--cell);
+		font-feature-settings: 'ss01';
+	}
+
+	/* the red margin rule of the notebook */
+	body::before {
+		content: '';
+		position: fixed;
+		inset-block: 0;
+		left: calc(var(--margin) - 2px);
+		width: 2px;
+		background: var(--rule);
+		z-index: 0;
+		transform-origin: top;
+		animation: draw-rule 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+	}
+
+	::selection {
+		background: var(--ink);
+		color: var(--paper);
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--rule);
+		outline-offset: 3px;
+	}
+
+	a {
+		text-underline-offset: 0.22em;
+		text-decoration-thickness: 1.5px;
+	}
+
+	h1,
+	h2,
+	h3 {
+		text-wrap: balance;
+	}
+
+	code,
+	kbd,
+	time,
+	.tabular {
+		font-variant-numeric: tabular-nums;
 	}
 }
 
-@utility animate-in-view {
-	opacity: 0;
-	translate: 0 20px;
-	transition:
-		opacity 0.5s ease-out,
-		translate 0.5s ease-out;
-	transition-delay: var(--stagger, 0s);
-
-	&.in-view {
-		opacity: 1;
-		translate: 0 0;
+@keyframes draw-rule {
+	from {
+		transform: scaleY(0);
 	}
+}
+
+/* A row on the sheet: margin column + writing column. */
+@utility sheet {
+	position: relative;
+	z-index: 1;
+	display: grid;
+	grid-template-columns: var(--margin) minmax(0, 1fr);
+	padding-right: var(--cell);
+
+	@media (min-width: 768px) {
+		padding-right: calc(var(--cell) * 3);
+	}
+
+	& > * {
+		grid-column: 2;
+		padding-left: var(--cell);
+		max-width: calc(var(--cell) * 50);
+	}
+
+	& > .in-margin {
+		grid-column: 1;
+		grid-row: 1;
+		padding-left: 0;
+		padding-right: var(--cell);
+		text-align: right;
+	}
+
+	@media (max-width: 767px) {
+		& > .in-margin {
+			grid-column: 2;
+			grid-row: auto;
+			order: 1;
+			padding-left: var(--cell);
+			text-align: left;
+		}
+	}
+}
+
+/* Margin note: dates, counts, status. Red numerals, like a pen in the margin. */
+@utility margin-note {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	line-height: var(--cell);
+	letter-spacing: 0.02em;
+	color: var(--rule);
+}
+
+/* Section heading with an ink rule that draws in once. */
+@utility section-title {
+	position: relative;
+	font-size: clamp(2rem, 4.5vw, 3rem);
+	line-height: calc(var(--cell) * 2);
+	font-weight: 800;
+	letter-spacing: -0.035em;
+	padding-bottom: var(--cell);
+
+	&::after {
+		content: '';
+		position: absolute;
+		left: var(--cell);
+		right: 0;
+		bottom: calc(var(--cell) / 2 - 1px);
+		height: 2px;
+		background: var(--line);
+		transform-origin: left;
+		transform: scaleX(var(--drawn, 1));
+		transition: transform 900ms cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	@media (max-width: 767px) {
+		&::after {
+			left: var(--cell);
+		}
+	}
+}
+
+@utility ink-box {
+	border: 2px solid var(--ink);
+	background: var(--paper);
+}
+
+@utility chip {
+	display: inline-flex;
+	align-items: center;
+	height: var(--cell);
+	padding-inline: calc(var(--cell) / 2);
+	border: 1.5px solid var(--ink);
+	color: var(--ink);
+	font-size: 0.875rem;
+	line-height: 1;
+	cursor: pointer;
+	transition:
+		background-color 160ms ease-out,
+		color 160ms ease-out;
+
+	&:hover {
+		background: var(--ink-soft);
+	}
+
+	&[aria-pressed='true'] {
+		background: var(--ink);
+		color: var(--paper);
+	}
+}
+
+@utility ink-link {
+	color: var(--ink);
+	font-weight: 600;
+	text-decoration: underline;
+	text-decoration-color: color-mix(in oklab, var(--ink) 35%, transparent);
+
+	&:hover {
+		text-decoration-color: var(--ink);
+	}
+}
+
+/* Rules that draw in when their section enters view. JS only removes the class
+   for motion-safe users, so content is never hidden by default. */
+.awaiting-ink {
+	--drawn: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.animate-in-view {
-		opacity: 1;
-		translate: 0 0;
-		transition: none;
+	html {
+		scroll-behavior: auto;
 	}
-}
 
-@keyframes float {
-	0%,
-	100% {
-		translate: 0 0;
-	}
-	50% {
-		translate: 0 -15px;
-	}
-}
-
-@utility animate-float {
-	animation: float 4s ease-in-out infinite;
-
-	@media (prefers-reduced-motion: reduce) {
+	body::before {
 		animation: none;
+	}
+
+	.awaiting-ink {
+		--drawn: 1;
+	}
+}
+
+/* Opaque header: plain paper, so nothing ghosts through and the page grid stays aligned. */
+@utility nav-paper {
+	background-color: var(--paper);
+}
+
+/* A tech selected in Stack overprints the places that used it, slightly off-register. */
+[data-place] .place-name {
+	transition: text-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-place][data-marked] .place-name {
+	text-shadow: 3px 3px 0 color-mix(in oklab, var(--ink) 30%, transparent);
+}
+
+/* Blog prose in the notebook's ink. */
+.prose-notebook {
+	--tw-prose-body: var(--text);
+	--tw-prose-headings: var(--text);
+	--tw-prose-lead: var(--muted);
+	--tw-prose-links: var(--ink);
+	--tw-prose-bold: var(--text);
+	--tw-prose-counters: var(--rule);
+	--tw-prose-bullets: var(--ink);
+	--tw-prose-hr: var(--line);
+	--tw-prose-quotes: var(--text);
+	--tw-prose-quote-borders: var(--ink);
+	--tw-prose-captions: var(--muted);
+	--tw-prose-code: var(--ink);
+	--tw-prose-pre-code: var(--text);
+	--tw-prose-pre-bg: var(--paper);
+	--tw-prose-th-borders: var(--line);
+	--tw-prose-td-borders: var(--grid);
+	font-size: 1.125rem;
+	line-height: 1.75;
+
+	& :where(h2, h3) {
+		font-weight: 800;
+		letter-spacing: -0.025em;
+	}
+
+	& :where(a) {
+		text-decoration-color: color-mix(in oklab, var(--ink) 40%, transparent);
+	}
+
+	& :where(pre) {
+		border: 2px solid var(--line);
+		border-radius: 0;
+		font-size: 0.875rem;
+	}
+
+	& :where(:not(pre) > code) {
+		background: var(--ink-soft);
+		padding: 0.1em 0.35em;
+		font-weight: 500;
+	}
+
+	& :where(:not(pre) > code)::before,
+	& :where(:not(pre) > code)::after {
+		content: none;
 	}
 }

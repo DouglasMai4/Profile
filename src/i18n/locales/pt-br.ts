@@ -1,101 +1,91 @@
 export const ptBR = {
   meta: {
-    title: "Douglas Maia | Desenvolvedor Full Stack",
+    title: "Douglas Maia | Dev Full Stack",
     description:
-      "Douglas Maia, desenvolvedor Full Stack. Transformando ideias complexas em código de alto desempenho, com arquiteturas escaláveis e interfaces imersivas.",
+      "Douglas Maia, dev full stack em Joinville (SC). Go, TypeScript, sistemas distribuídos e IA. Projetos, experiência e um blog sobre o que aprendo no caminho.",
     blogTitle: "Blog | Douglas Maia",
     blogDescription:
-      "Ideias e experiências sobre desenvolvimento web, arquitetura de software e tecnologia, por Douglas Maia.",
+      "Anotações sobre desenvolvimento web, arquitetura de software e tecnologia, escritas por Douglas Maia.",
   },
   navbar: {
-    home: "Inicio",
-    about: "Sobre",
-    projects: "Projetos",
-    contact: "Contato",
+    work: "Trabalho",
+    stack: "Stack",
     blog: "Blog",
-    language: "Mudar idioma",
+    contact: "Contato",
+    language: "Idioma",
+    themeLight: "Usar tema claro",
+    themeDark: "Usar tema escuro",
+    skip: "Pular para o conteúdo",
   },
   hero: {
-    badge: "Desenvolvedor Full Stack",
-    titleStart: "Criador de",
-    titleHighlight: " Soluções Digitais",
-    description:
-      "Transformando ideias complexas em código de alto desempenho. Especialista em construir arquiteturas escaláveis e interfaces imersivas.",
-    explore: "Explore meus projetos",
-    talk: "Vamos conversar",
-    terminalReturn: "Soluções Incríveis",
+    role: "dev full stack · Go & TypeScript",
+    intro:
+      "Moro em Joinville (SC). Hoje cuido da arquitetura na Goalfy, toco a Kingdom Softwares e mentoro gente entrando em tecnologia na Escola da Nuvem. Este site é o meu caderno: o que eu faço, com o que eu faço, e o que eu aprendo no caminho.",
+    latest: "Último texto",
   },
-  about: {
-    badge: "Sobre Mim",
-    title: "Olá, Sou Douglas Maia",
-    contentHtml:
-      'Sou um desenvolvedor <strong class="text-foreground">Full Stack</strong> apaixonado por transformar linhas de código em soluções reais. Com sólida experiência em <strong class="text-foreground">desenvolvimento web</strong>, minha missão é criar arquiteturas que sejam não apenas funcionais, mas também escaláveis e elegantes. Minha trajetória profissional abrange desde aplicações empresariais complexas até automação de processos, sempre com foco obsessivo em <span class="text-primary underline decoration-primary/30 underline-offset-4">desempenho</span> e experiência do usuário.',
-    founderDescription:
-      "Software house focada em excelência técnica e inovação.",
-    stacks: {
-      frontend: "Front-end",
+  api: {
+    title: "Me consulta",
+    note: "A API é de mentira. Os dados são de verdade.",
+    label: "Rota",
+    send: "Enviar",
+    hint: "Enter envia · ↑ ↓ histórico",
+    notFound: "Essa rota não existe. Tenta uma destas:",
+    routes: "Rotas",
+  },
+  work: {
+    title: "Trabalho",
+    experience: "Onde trabalhei",
+    projects: "Coisas que eu fiz",
+    now: "hoje",
+    building: "em construção",
+    live: "no ar",
+    links: { site: "Site", docs: "Docs", code: "Código" },
+    github: "Mais coisas no GitHub",
+  },
+  stack: {
+    title: "Stack",
+    intro:
+      "Escolhe uma tecnologia e eu te mostro onde usei de verdade. Nada de barrinha de 80% de React.",
+    areas: {
       backend: "Back-end",
-      database: "Banco de Dados",
-      tools: "Ferramentas",
+      frontend: "Front-end",
+      data: "Dados",
+      ai: "IA",
+      infra: "Infra",
     },
+    usedIn: "Usei em",
+    daily: "Uso no dia a dia, em tudo.",
   },
-  projects: {
-    badge: "Portfólio",
-    titleStart: "Projetos",
-    titleHighlight: " Selecionados",
-    description:
-      "Uma coleção de desafios técnicos resolvidos, desde aplicações open-source até sistemas corporativos de alto nível.",
-    seeGithub: "Ver todos os repositórios no GitHub",
-    test: "Testar",
-    code: "Código",
-    docs: "Docs",
-    private: "Privado",
-    privateCode: "Código Privado",
-    completed: "Concluído",
-    inDevelopment: "Em Desenvolvimento",
-    items: {
-      kori: "Toolkit HTTP para Go construído sobre o Chi — inspirado no Hono e feito para ser idiomático em Go. Simplifica a criação de APIs rápidas, organizadas e tipadas.",
-      goalfy:
-        "CRM 360 com IA, WhatsApp e automações para operações de vendas, feito para o vendedor brasileiro. Onde atuo atualmente como desenvolvedor.",
-      kingdom:
-        "Software house focada em excelência técnica e inovação, onde atuo como fundador construindo soluções sob medida.",
-      forge:
-        "CRM com integração nativa ao WhatsApp, centralizando leads, conversas e rotinas comerciais em um único sistema rápido e escalável.",
-    },
+  writing: {
+    title: "Escrevendo",
+    intro: "Escrevo quando aprendo algo que eu queria ter lido antes.",
+    all: "Todos os textos",
   },
   contact: {
-    badge: "Contato",
-    titleLine1: "Vamos construir algo",
-    titleLine2Highlight: "incrível juntos?",
-    descriptionHtml:
-      'Estou sempre aberto a novos desafios e parcerias. Escolha seu canal preferido e mande um <strong>"Olá"</strong>.',
-    items: {
-      whatsapp: "Vamos conversar rapidinho?",
-      linkedin: "Conecte-se profissionalmente",
-      github: "Repositórios e projetos",
-      telegram: "Chat direto e seguro",
-      email: "Para assuntos detalhados",
-    },
+    title: "Bora conversar?",
+    intro:
+      "Seja pra um projeto, uma vaga ou só trocar ideia sobre Go. Email é o jeito mais certo de me achar; WhatsApp é o mais rápido.",
   },
   footer: {
-    allRights: "Todos os direitos reservados.",
-    developedWith: "Desenvolvido com",
-    andCoffee: "e muito café.",
+    made: "Feito com Astro, num caderno quadriculado.",
+    top: "Voltar ao topo",
   },
   blog: {
-    badge: "Blog",
-    titleStart: "Ideias &",
-    titleHighlight: " Experiências",
+    title: "Blog",
     description:
-      "Compartilhando aprendizados sobre desenvolvimento web, arquitetura de software e tecnologia.",
-    readMore: "Ler artigo",
-    backToBlog: "Voltar para o blog",
+      "Anotações sobre desenvolvimento web, arquitetura e o que mais aparecer no caminho.",
     minRead: "min de leitura",
-    empty: "Nenhum artigo publicado ainda. Volte em breve!",
-    latestTitleStart: "Último",
-    latestTitleHighlight: " Artigo",
-    latestDescription:
-      "O que saiu mais recente do meu blog sobre desenvolvimento e tecnologia.",
-    seeAll: "Ver todos os artigos",
+    empty: "Ainda não tem texto por aqui. Volta logo!",
+    noMatch: "Nenhum texto com essa tag.",
+    allTags: "Todos",
+    filter: "Filtrar por tag",
+    count: (n: number) => (n === 1 ? "1 texto" : `${n} textos`),
+    backToBlog: "Voltar pro blog",
+    share: "Compartilhar",
+    copy: "Copiar link",
+    copied: "Link copiado",
+    previous: "Texto anterior",
+    next: "Próximo texto",
+    progress: "Progresso de leitura",
   },
 };

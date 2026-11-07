@@ -1,0 +1,129 @@
+---
+import { getDict, type Locale } from '@/i18n';
+import { areas, experience, placeNames, projects, stack, type PlaceId } from '@/data/profile';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDict(locale);
+
+// What was done at each place, one line, so a selected tech explains itself.
+const placeLine: Record<PlaceId, string> = {
+	...Object.fromEntries(experience.map((job) => [job.id, job.role[locale]])),
+	...Object.fromEntries(projects.map((project) => [project.id, project.role[locale]])),
+	site: locale === 'pt-br' ? 'este site' : 'this site',
+} as Record<PlaceId, string>;
+
+const first = stack[0];
+---
+
+<section id="stack" class="pt-[calc(var(--cell)*6)]" aria-labelledby="stack-title">
+	<div class="sheet">
+		<h2 id="stack-title" class="section-title">{t.stack.title}</h2>
+	</div>
+	<p class="sheet mt-cell"><span class="max-w-[40rem] block text-muted">{t.stack.intro}</span></p>
+
+	<div class="sheet mt-[calc(var(--cell)*2)]" data-stack>
+		<div class="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] gap-x-[calc(var(--cell)*3)] gap-y-[calc(var(--cell)*2)] items-start">
+			<dl class="space-y-cell">
+				{
+					areas.map((area) => (
+						<div class="grid sm:grid-cols-[calc(var(--cell)*5)_minmax(0,1fr)] gap-x-cell gap-y-2 border-t-[1.5px] border-grid pt-[calc(var(--cell)*0.5)]">
+							<dt class="font-bold text-sm pt-0.5">{t.stack.areas[area]}</dt>
+							<dd class="flex flex-wrap gap-1.5">
+								{stack
+									.filter((tech) => tech.area === area)
+									.map((tech) => (
+										<button
+											type="button"
+											class="chip"
+											data-tech={tech.name}
+											data-used={tech.used.join(' ')}
+											aria-pressed={tech.name === first.name ? 'true' : 'false'}
+											aria-controls="stack-detail"
+										>
+											{tech.name}
+										</button>
+									))}
+							</dd>
+						</div>
+					))
+				}
+			</dl>
+
+			<div id="stack-detail" class="ink-box p-cell lg:sticky lg:top-[calc(var(--cell)*5)]" aria-live="polite">
+				{
+					stack.map((tech) => (
+						<div data-detail={tech.name} hidden={tech.name !== first.name}>
+							<p class="text-[2rem] leading-[calc(var(--cell)*2)] font-extrabold tracking-tight">{tech.name}</p>
+							{tech.used.length > 0 ? (
+								<>
+									<p class="mt-[calc(var(--cell)*0.5)] font-mono text-xs text-ink">{t.stack.usedIn}</p>
+									<ul class="mt-1">
+										{tech.used.map((id) => (
+											<li class="flex items-baseline justify-between gap-4 border-b-[1.5px] border-grid py-1.5">
+												<a href={`#work`} data-jump={id} class="font-semibold text-ink hover:underline">
+													{placeNames[id]}
+												</a>
+												<span class="text-sm text-muted text-right">{placeLine[id]}</span>
+											</li>
+										))}
+									</ul>
+								</>
+							) : (
+								<p class="mt-[calc(var(--cell)*0.5)] text-muted">{t.stack.daily}</p>
+							)}
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	const root = document.querySelector<HTMLElement>('[data-stack]');
+	if (root) {
+		const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-tech]')];
+		const details = root.querySelectorAll<HTMLElement>('[data-detail]');
+
+		const select = (name: string) => {
+			for (const button of buttons) button.setAttribute('aria-pressed', String(button.dataset.tech === name));
+			for (const detail of details) detail.hidden = detail.dataset.detail !== name;
+			const used = (buttons.find((b) => b.dataset.tech === name)?.dataset.used ?? '').split(' ');
+			for (const place of document.querySelectorAll<HTMLElement>('[data-place]')) {
+				place.toggleAttribute('data-marked', used.includes(place.dataset.place ?? ''));
+			}
+		};
+
+		for (const button of buttons) {
+			button.addEventListener('click', () => select(button.dataset.tech ?? ''));
+			button.addEventListener('keydown', (event) => {
+				const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[event.key];
+				if (!step) return;
+				event.preventDefault();
+				const next = buttons[(buttons.indexOf(button) + step + buttons.length) % buttons.length];
+				next.focus();
+				select(next.dataset.tech ?? '');
+			});
+		}
+
+		select(buttons.find((b) => b.getAttribute('aria-pressed') === 'true')?.dataset.tech ?? '');
+
+		// Jumping to a place briefly marks it in the margin, like circling it with a pen.
+		root.addEventListener('click', (event) => {
+			const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('[data-jump]');
+			if (!link) return;
+			const target = document.querySelector<HTMLElement>(`[data-place="${link.dataset.jump}"]`);
+			if (!target) return;
+			event.preventDefault();
+			target.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+			target.animate(
+				[{ backgroundColor: 'var(--ink-soft)' }, { backgroundColor: 'transparent' }],
+				{ duration: 1600, easing: 'ease-out', delay: 300 },
+			);
+		});
+	}
+</script>

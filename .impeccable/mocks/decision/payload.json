@@ -1,0 +1,46 @@
+{
+  "title": "Escolha o mundo visual",
+  "question": "O sorteio indicou o Caderno Quadriculado. Mantenha, escolha uma alternativa ou sorteie de novo.",
+  "options": [
+    {
+      "id": "assigned", "kind": "assigned", "label": "Caderno Quadriculado", "kicker": "THE ROLL",
+      "lineage": "caderno quadriculado de engenharia (Tilibra, 5 mm)",
+      "thesis": "O site é a página do caderno onde você resolve problemas: grade azul, margem vermelha, tinta de caneta.",
+      "palette": ["#fbfcfe", "#d6e4f3", "#1c3a9e", "#14223f", "#e0463a"],
+      "materials": ["grade de 24px", "tinta azul de caneta", "linha de margem vermelha"],
+      "viewport": "Nome grande à esquerda da margem; à direita um playground ao vivo que consulta sua stack como uma API; último artigo ancorado no pé.",
+      "risk": "Se a grade ficar forte demais vira fantasia de papelaria e perde o minimalismo.",
+      "raised": [
+        {"from": "ikebana-ma", "raise": "Um assunto por página: a grade vazia fica carregada, nunca preenchida para ocupar espaço."},
+        {"from": "oscilloscope", "raise": "Tudo se mede pela grade: cada elemento encaixa na célula, nada flutua fora dela."},
+        {"from": "single-hue", "raise": "Uma tinta só (azul) carrega texto e ação; o vermelho fica só para margem e estado ativo."},
+        {"from": "ansi-bbs", "raise": "Operação completa por teclado no playground e na stack."},
+        {"from": "ukiyoe", "raise": "Projetos se montam em camadas registradas: contorno primeiro, detalhes entram depois."}
+      ],
+      "html": ".impeccable/mocks/decision/assigned.html",
+      "comp": ".impeccable/mocks/decision/assigned.png"
+    },
+    {
+      "id": "model-pick", "kind": "pick", "label": "Mapa do Metrô", "kicker": "IMPECCABLE’S PICK",
+      "lineage": "diagrama da rede do Metrô de São Paulo",
+      "thesis": "Cada tecnologia é uma linha colorida; cada projeto, uma estação onde as linhas se cruzam.",
+      "palette": ["#ffffff", "#111111", "#0455A1", "#007E5E", "#EE372F", "#FFD200"],
+      "materials": ["linhas de 14px", "estações em círculo branco", "sinalização sans"],
+      "viewport": "Nome à esquerda, mapa interativo da stack à direita; o artigo mais recente como 'próximo trem'.",
+      "risk": "Metáfora de mapa é familiar em portfólios e pode virar fantasia se o mapa não for navegável de verdade.",
+      "html": ".impeccable/mocks/decision/pick.html",
+      "comp": ".impeccable/mocks/decision/pick.png"
+    },
+    {"id":"ch-disk","kind":"challenger","catalogId":"galaxies-nebulae-deep-time-accretion-disk-threshold","label":"Disco de acreção","verdict":"declined","lineage":"astrofísica","thesis":"Conteúdo orbitando um horizonte.","palette":["#000000","#cfe3ff","#c4462b","#e2b84a"],"materials":["shader","anéis"],"viewport":"Disco luminoso em fundo preto.","risk":"Nada do produto vive ali.","case":"Não se funde: nenhum fato do portfólio vira órbita.","kept":"Um único ponto focal por tela."},
+    {"id":"ch-ikebana","kind":"challenger","catalogId":"growth-metamorphosis-branching-ikebana-ma-arrangement","label":"Ikebana / ma","verdict":"declined","lineage":"tokonoma japonês","thesis":"O vazio ativo como composição.","palette":["#e9e4da","#6b5e4f","#3c5aa6","#3a2f24"],"materials":["reboco","bronze"],"viewport":"Um galho em alcova vazia.","risk":"Contemplativo demais para mostrar competência.","case":"Perde em identificação do público e clareza.","kept":"Vazio carregado, um assunto por página."},
+    {"id":"ch-ukiyoe","kind":"challenger","catalogId":"graphic-worlds-publishing-ukiyoe-block-registration","label":"Xilogravura registrada","verdict":"declined","lineage":"ukiyo-e","thesis":"A página se monta bloco a bloco.","palette":["#1f2f5c","#c8473a","#6b4a2f","#efe6d2"],"materials":["papel kozo","blocos"],"viewport":"Contorno, depois cores.","risk":"Estranho ao mundo de um dev brasileiro.","case":"Perde nos dois eixos.","kept":"Revelação em camadas registradas."},
+    {"id":"ch-hue","kind":"challenger","catalogId":"brand-identity-canon-single-hue-doll-program","label":"Programa de uma cor","verdict":"declined","lineage":"identidade de brinquedo","thesis":"Uma cor dona de tudo.","palette":["#e4007c","#ffffff"],"materials":["brilho","script"],"viewport":"Tela inundada de uma cor.","risk":"Lê como marca de produto, não como pessoa.","case":"Perde nos dois eixos.","kept":"Compromisso total com uma tinta."},
+    {"id":"ch-bbs","kind":"challenger","catalogId":"medium-native-ansi-bbs-nightboard","label":"BBS ANSI","verdict":"declined","lineage":"BBS discado","thesis":"Tudo em tela de texto.","palette":["#000000","#00ffff","#ff00ff","#0000aa"],"materials":["CP437","grade 80×25"],"viewport":"Tela de título ANSI.","risk":"É o visual de terminal que o site atual já usa.","case":"Devs se identificam, mas repete o clichê atual e afasta clientes.","kept":"Operação completa por teclado."},
+    {"id":"ch-scope","kind":"challenger","catalogId":"scientific-notation-oscilloscope-signal-bench","label":"Osciloscópio","verdict":"declined","lineage":"bancada de sinal","thesis":"Tudo medido contra a graticula.","palette":["#0a0f0a","#39ff6a","#5a6660","#ffb02e"],"materials":["fósforo","vidro"],"viewport":"Traço verde na grade.","risk":"Fantasia de instrumento; pouco legível para leitura.","case":"Perde nos dois eixos.","kept":"Tudo medido pela grade."}
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "code", "toggle": false},
+  "canon": true,
+  "canonCard": {"kind":"canon","label":"O padrão da categoria","thesis":"Portfólio de dev escuro e limpo, duas colunas, feito com cuidado.","palette":["#0b0d12","#e6e8ee","#9aa3b5","#5b8cff"],"materials":["grid limpo","cards discretos"],"viewport":"Nome e navegação fixos à esquerda, projetos e posts rolando à direita.","risk":"Indistinguível de centenas de portfólios, por definição.","html":".impeccable/mocks/decision/canon.html"},
+  "steer": true
+}
