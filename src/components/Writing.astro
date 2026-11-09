@@ -12,8 +12,7 @@ interface Props {
 const { locale } = Astro.props;
 const t = getDict(locale);
 const all = await getPosts(locale);
-// The newest post already leads the hero; list only the ones after it.
-const posts = all.slice(1, 4);
+const posts = all.slice(0, 3);
 ---
 
 {

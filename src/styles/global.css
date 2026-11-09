@@ -299,6 +299,12 @@
 		text-decoration-color: color-mix(in oklab, var(--ink) 40%, transparent);
 	}
 
+	& :where(a[target='_blank'])::after {
+		content: '↗' / '';
+		margin-left: 0.15em;
+		font-size: 0.8em;
+	}
+
 	& :where(pre) {
 		border: 2px solid var(--line);
 		border-radius: 0;

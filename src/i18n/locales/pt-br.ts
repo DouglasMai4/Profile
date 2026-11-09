@@ -21,7 +21,6 @@ export const ptBR = {
     role: "dev full stack · Go & TypeScript",
     intro:
       "Moro em Joinville (SC). Hoje cuido da arquitetura na Goalfy, toco a Kingdom Softwares e mentoro gente entrando em tecnologia na Escola da Nuvem. Este site é o meu caderno: o que eu faço, com o que eu faço, e o que eu aprendo no caminho.",
-    latest: "Último texto",
   },
   api: {
     title: "Me consulta",

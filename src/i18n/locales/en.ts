@@ -23,7 +23,6 @@ export const en: Dictionary = {
     role: "full stack dev · Go & TypeScript",
     intro:
       "I live in Joinville, Brazil. Right now I own the architecture at Goalfy, run Kingdom Softwares, and mentor people moving into tech at Escola da Nuvem. This site is my notebook: what I do, what I do it with, and what I learn along the way.",
-    latest: "Latest post",
   },
   api: {
     title: "Query me",

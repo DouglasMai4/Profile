@@ -12,15 +12,20 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/markdown-satteri": "^0.3.5",
     "@astrojs/sitemap": "^3.7.3",
     "@fontsource-variable/jetbrains-mono": "^5.3.0",
     "@fontsource-variable/schibsted-grotesk": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/schibsted-grotesk": "^5.3.0",
     "@lucide/astro": "^1.28.0",
+    "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "astro": "^7.1.6",
+    "satori": "^0.63.2",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {

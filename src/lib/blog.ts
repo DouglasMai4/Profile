@@ -28,5 +28,15 @@ export function formatDate(date: Date, locale: Locale): string {
     year: "numeric",
     month: "long",
     day: "numeric",
+    timeZone: "UTC",
+  });
+}
+
+export function formatShortDate(date: Date, locale: Locale): string {
+  return date.toLocaleDateString(locale === "pt-br" ? "pt-BR" : "en-US", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    timeZone: "UTC",
   });
 }
