@@ -57,7 +57,7 @@ I started studying more, experimenting with tools, and building small projects t
 
 Along the way, I began exploring technologies like Chi and SQLC, while also paying more attention to Go's standard library.
 
-That's also how [Kori](https://douglasmai4.github.io/kori-docs) came to life, my own toolkit for Go, built on top of Chi. It was a way to turn some of what I was learning into something tangible, experiment with ideas, and share a bit of that journey with others.
+That's also how [Kori](https://kori.douglasmaia.dev.br) came to life, my own toolkit for Go, built on top of Chi. It was a way to turn some of what I was learning into something tangible, experiment with ideas, and share a bit of that journey with others.
 
 Projects like this hold a special value for me. They allow me to move beyond simply consuming documentation and examples and take on the challenge of building something, making decisions, and dealing with the problems that come along the way.
 

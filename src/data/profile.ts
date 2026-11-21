@@ -122,7 +122,7 @@ export const projects: Project[] = [
 		status: 'building',
 		image: '/kori.png',
 		links: [
-			{ label: 'docs', href: 'https://douglasmai4.github.io/kori-docs' },
+			{ label: 'docs', href: 'https://kori.douglasmaia.dev.br' },
 			{ label: 'code', href: 'https://github.com/douglasmai4/kori' },
 		],
 	},
